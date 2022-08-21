@@ -17,6 +17,11 @@ const storageVultr = require("./storage/vultr");
 const storageGcp = require("./storage/gcp");
 const storageAws = require("./storage/aws");
 const storageAzure = require("./storage/azure");
+// database
+const databaseLinode = require("./database/linode");
+const databaseOvh = require("./database/ovh");
+const databaseDigital = require("./database/digitalOcean");
+const databaseVultr = require("./database/vultr");
 
 // add stealth plugin and use defaults (all evasion techniques)
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
@@ -27,10 +32,10 @@ puppeteer.use(StealthPlugin());
     headless: false,
   });
 
-  //  LINODE SCRAPPING
-  const page1 = await browser.newPage();
-  await page1.goto("https://www.linode.com/pricing/");
-  await computeLinode.linode(page1);
+  // //  LINODE SCRAPPING
+  // const page1 = await browser.newPage();
+  // await page1.goto("https://www.linode.com/pricing/");
+  // await computeLinode.linode(page1);
 
   // // OVH SCRAPPING
   // const page2 = await browser.newPage();
@@ -113,6 +118,36 @@ puppeteer.use(StealthPlugin());
   //   }
   // );
   // await storageAzure.azureS(page12);
+
+  //:::::::: DATABASE START HERE  ::::::::::::
+
+  // // LINODE DATABASE SCRAPPING
+  // const page13 = await browser.newPage();
+  // await page13.goto("https://www.linode.com/pricing/", {
+  //   waitUntil: "networkidle2",
+  // });
+  // await databaseLinode.linodeD(page13);
+
+  // // OVH DATABASE SCRAPPING
+  // const page14 = await browser.newPage();
+  // await page14.goto("https://www.ovhcloud.com/fr/public-cloud/prices/", {
+  //   waitUntil: "networkidle2",
+  // });
+  // await databaseOvh.ovhD(page14);
+
+  // // DIGITAL OCEAN DATABASE SCRAPPING
+  // const page15 = await browser.newPage();
+  // await page15.goto("https://www.digitalocean.com/pricing/managed-databases", {
+  //   waitUntil: "networkidle2",
+  // });
+  // await databaseDigital.digitalD(page15);
+
+  // VULTR DATABASE SCRAPPING
+  const page16 = await browser.newPage();
+  await page16.goto("https://www.vultr.com/pricing/", {
+    waitUntil: "networkidle2",
+  });
+  await databaseVultr.vultrD(page16);
 
   // close browser
   await browser.close();
