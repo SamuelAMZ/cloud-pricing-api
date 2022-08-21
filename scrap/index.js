@@ -22,6 +22,12 @@ const databaseLinode = require("./database/linode");
 const databaseOvh = require("./database/ovh");
 const databaseDigital = require("./database/digitalOcean");
 const databaseVultr = require("./database/vultr");
+const databaseGcp = require("./database/gcp");
+const databaseAws = require("./database/aws");
+const databaseAwsMongo = require("./database/_aws-mongo");
+const databaseAzure = require("./database/azure");
+const databaseAzureMysql = require("./database/_azure-mysql");
+const databaseAzureMongo = require("./database/_azure-mongo");
 
 // add stealth plugin and use defaults (all evasion techniques)
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
@@ -142,12 +148,42 @@ puppeteer.use(StealthPlugin());
   // });
   // await databaseDigital.digitalD(page15);
 
-  // VULTR DATABASE SCRAPPING
-  const page16 = await browser.newPage();
-  await page16.goto("https://www.vultr.com/pricing/", {
-    waitUntil: "networkidle2",
-  });
-  await databaseVultr.vultrD(page16);
+  // // VULTR DATABASE SCRAPPING
+  // const page16 = await browser.newPage();
+  // await page16.goto("https://www.vultr.com/pricing/");
+  // await databaseVultr.vultrD(page16);
+
+  // // GCP DATABASE SCRAPPING
+  // const page17 = await browser.newPage();
+  // // https://cloud.google.com/sql/docs/postgres/pricing
+  // await page17.goto("https://www.mongodb.com/pricing");
+  // await databaseGcp.gcpD(page17);
+
+  // // AWS DATABASE SCRAPPING
+  // const page18 = await browser.newPage();
+  // await page18.goto("https://instances.vantage.sh/rds/");
+  // await databaseAws.awsD(page18);
+  // // aws mongo subwork
+  // const page19 = await browser.newPage();
+  // await page19.goto("https://www.mongodb.com/pricing");
+  // await databaseAwsMongo.awsMd(page19);
+
+  // // AZURE DATABASE SCRAPPING
+  // const page20 = await browser.newPage();
+  // await page20.goto(
+  //   "https://azure.microsoft.com/en-us/pricing/details/postgresql/server/"
+  // );
+  // await databaseAzure.azureD(page20);
+  // // mysql azure
+  // const page21 = await browser.newPage();
+  // await page21.goto(
+  //   "https://azure.microsoft.com/en-us/pricing/details/mysql/server/"
+  // );
+  // await databaseAzureMysql.azureDm(page21);
+  // aws mongo subwork
+  const page22 = await browser.newPage();
+  await page22.goto("https://www.mongodb.com/pricing");
+  await databaseAzureMongo.azureMd(page22);
 
   // close browser
   await browser.close();
