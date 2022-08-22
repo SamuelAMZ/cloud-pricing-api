@@ -28,6 +28,14 @@ const databaseAwsMongo = require("./database/_aws-mongo");
 const databaseAzure = require("./database/azure");
 const databaseAzureMysql = require("./database/_azure-mysql");
 const databaseAzureMongo = require("./database/_azure-mongo");
+// networking
+const networkingLinode = require("./networking/linode");
+const networkingDigital = require("./networking/digitalOcean");
+const networkingVultr = require("./networking/vultr");
+const networkingOvh = require("./networking/ovh");
+const networkingGcp = require("./networking/gcp");
+const networkingAws = require("./networking/aws");
+const networkingAzure = require("./networking/azure");
 
 // add stealth plugin and use defaults (all evasion techniques)
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
@@ -180,10 +188,39 @@ puppeteer.use(StealthPlugin());
   //   "https://azure.microsoft.com/en-us/pricing/details/mysql/server/"
   // );
   // await databaseAzureMysql.azureDm(page21);
-  // aws mongo subwork
-  const page22 = await browser.newPage();
-  await page22.goto("https://www.mongodb.com/pricing");
-  await databaseAzureMongo.azureMd(page22);
+  // // azure mongo subwork
+  // const page22 = await browser.newPage();
+  // await page22.goto("https://www.mongodb.com/pricing");
+  // await databaseAzureMongo.azureMd(page22);
+
+  // // LINODE NETWORKING SCRAPPING
+  // const page23 = await browser.newPage();
+  // await page23.goto("https://www.linode.com/pricing/");
+  // await networkingLinode.linodeN(page23);
+
+  // // DIGITAL NETWORKING SCRAPPING
+  // const page24 = await browser.newPage();
+  // await page24.goto("https://www.digitalocean.com/pricing/load-balancers");
+  // await networkingDigital.digitalN(page24);
+
+  // // VULTR NETWORKING SCRAPPING
+  // const page25 = await browser.newPage();
+  // await page25.goto("https://www.vultr.com/pricing/#load-balancers");
+  // await networkingVultr.vultrN(page25);
+
+  // // OVH NETWORKING SCRAPPING
+  // const page26 = await browser.newPage();
+  // await page26.goto("https://www.ovhcloud.com/fr/public-cloud/prices/");
+  // await networkingOvh.ovhN(page26);
+
+  // // GCP NETWORKING SCRAPPING
+  // await networkingGcp.gcpN();
+
+  // // AWS NETWORKING SCRAPPING
+  // await networkingAws.awsN();
+
+  // // AZURE NETWORKING SCRAPPING
+  // await networkingAzure.azureN();
 
   // close browser
   await browser.close();
