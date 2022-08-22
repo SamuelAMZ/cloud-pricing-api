@@ -154,9 +154,7 @@ puppeteer.use(StealthPlugin());
   // VULTR STORAGE SCRAPPING
   const page11 = await browser.newPage();
   try {
-    await page11.goto(process.env.LINK_VULTR, {
-      waitUntil: "networkidle2",
-    });
+    await page11.goto(process.env.LINK_VULTR);
     await storageVultr.vultrS(page11);
   } catch (error) {
     console.log(error.message);
