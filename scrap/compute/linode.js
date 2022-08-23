@@ -1,5 +1,6 @@
-//   LINODE SCRAPPING
+const { linodeArr } = require("../data.js");
 
+//   LINODE SCRAPPING
 const linode = async (page1) => {
   //  scrap general purposes
   const linodeGP = await page1.evaluate(() =>
@@ -52,14 +53,15 @@ const linode = async (page1) => {
     }))
   );
 
-  console.log(
-    "---LINODE COMPUTE---",
-    linodeGP,
-    "---LINODE COMPUTE---",
-    linodeCP,
-    "---LINODE COMPUTE---",
-    linodeRM
-  );
+  const data = {
+    compute: {
+      generalPurpose: linodeGP,
+      cpuOptimized: linodeCP,
+      ramOptimized: linodeRM,
+    },
+  };
+
+  linodeArr(data);
 };
 
 exports.linode = linode;

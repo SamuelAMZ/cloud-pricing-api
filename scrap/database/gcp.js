@@ -1,3 +1,5 @@
+const { gcpArr } = require("../data.js");
+
 const gcpD = async (page17) => {
   const constantC = 0.0413; //per vCPU
   const constantR = 0.007; //per GB
@@ -108,7 +110,15 @@ const gcpD = async (page17) => {
     }))
   );
 
-  console.log(postgres, mysql, mongo);
+  const data = {
+    database: {
+      postgres: postgres,
+      mysql: mysql,
+      mongo: mongo,
+    },
+  };
+
+  gcpArr(data);
 };
 
 exports.gcpD = gcpD;

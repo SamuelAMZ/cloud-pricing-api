@@ -1,3 +1,5 @@
+const { azureArr } = require("../data.js");
+
 const azureS = async (page12) => {
   //  scrap premium storage
   const AzureP = await page12.evaluate(() => {
@@ -75,7 +77,16 @@ const azureS = async (page12) => {
     ];
   });
 
-  console.log(AzureP, AzureS);
+  // console.log(AzureP, AzureS);
+
+  const data = {
+    storage: {
+      premium: AzureP,
+      standard: AzureS,
+    },
+  };
+
+  azureArr(data);
 };
 
 exports.azureS = azureS;

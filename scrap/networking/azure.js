@@ -1,5 +1,6 @@
-//   GCP SCRAPPING
+const { azureArr } = require("../data.js");
 
+//   GCP SCRAPPING
 const azureN = async () => {
   const azure = {
     provider: "AZURE",
@@ -9,7 +10,15 @@ const azureN = async () => {
     },
   };
 
-  console.log(azure);
+  // console.log(azure);
+
+  const data = {
+    networking: {
+      nodeBalancers: azure,
+    },
+  };
+
+  azureArr(data);
 };
 
 exports.azureN = azureN;

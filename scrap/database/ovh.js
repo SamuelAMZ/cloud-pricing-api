@@ -1,3 +1,5 @@
+const { ovhArr } = require("../data.js");
+
 const ovhD = async (page14) => {
   //  scrap postgres
   const ovhPostgres = await page14.evaluate(() =>
@@ -44,11 +46,15 @@ const ovhD = async (page14) => {
     }))
   );
 
-  ovhPostgres.push({ name: "postgres" });
-  ovhMysql.push({ name: "mysql" });
-  ovhMongo.push({ name: "mongoDB" });
+  const data = {
+    database: {
+      postgres: ovhPostgres,
+      mysql: ovhMysql,
+      mongo: ovhMongo,
+    },
+  };
 
-  console.log(ovhPostgres, ovhMysql, ovhMongo);
+  ovhArr(data);
 };
 
 exports.ovhD = ovhD;

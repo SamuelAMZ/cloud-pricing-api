@@ -1,3 +1,5 @@
+const { awsArr } = require("../data.js");
+
 const awsS = async () => {
   const constantS = 0.023; //standard storage
   const constantO = 0.01; //nearline storage
@@ -34,7 +36,15 @@ const awsS = async () => {
     },
   ];
 
-  console.log(S3Standard, S3OneZone);
+  // console.log(S3Standard, S3OneZone);
+  const data = {
+    storage: {
+      S3Standard: S3Standard,
+      S3OneZone: S3OneZone,
+    },
+  };
+
+  awsArr(data);
 };
 
 exports.awsS = awsS;

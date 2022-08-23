@@ -1,5 +1,6 @@
-//   OVH SCRAPPING
+const { ovhArr } = require("../data.js");
 
+//   OVH SCRAPPING
 const ovhN = async (page26) => {
   //  scrap general purposes
   const ovh = await page26.evaluate(() => [
@@ -11,7 +12,14 @@ const ovhN = async (page26) => {
     },
   ]);
 
-  console.log(ovh);
+  // console.log(ovh);
+  const data = {
+    networking: {
+      nodeBalancers: ovh,
+    },
+  };
+
+  ovhArr(data);
 };
 
 exports.ovhN = ovhN;

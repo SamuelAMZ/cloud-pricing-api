@@ -1,3 +1,5 @@
+const { gcpArr } = require("../data.js");
+
 //   GCP SCRAPPING
 
 const gcpN = async () => {
@@ -9,7 +11,14 @@ const gcpN = async () => {
     },
   };
 
-  console.log(gcp);
+  // console.log(gcp);
+  const data = {
+    networking: {
+      nodeBalancers: gcp,
+    },
+  };
+
+  gcpArr(data);
 };
 
 exports.gcpN = gcpN;

@@ -1,5 +1,9 @@
+const { gcpArr } = require("../data.js");
+
 const gcp = async (page5) => {
   // select 100 results
+
+  const computeData = [];
 
   const test = async () => {
     await page5.select(
@@ -25,8 +29,7 @@ const gcp = async (page5) => {
       }))
     );
 
-    // put to the database from here
-    console.log(gcpAll);
+    computeData.push(gcpAll);
   };
 
   const heading1 = await page5.$eval(
@@ -46,6 +49,12 @@ const gcp = async (page5) => {
     await page5.click("#productList > nav > a.pagination-link.pagination-next");
     await page5.waitForTimeout(4000);
   }
+
+  const data = {
+    compute: { computeData },
+  };
+
+  gcpArr(data);
 };
 
 exports.gcp = gcp;

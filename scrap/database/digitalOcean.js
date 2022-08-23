@@ -1,3 +1,5 @@
+const { digitalArr } = require("../data.js");
+
 const digitalD = async (page15) => {
   //  scrap postgres
   const digitalPostgres = await page15.evaluate(() =>
@@ -44,7 +46,17 @@ const digitalD = async (page15) => {
     }))
   );
 
-  console.log(digitalPostgres, digitalMysql, digitalMongo);
+  // console.log(digitalPostgres, digitalMysql, digitalMongo);
+
+  const data = {
+    compute: {
+      postgres: digitalPostgres,
+      mysql: digitalMysql,
+      mongo: digitalMongo,
+    },
+  };
+
+  digitalArr(data);
 };
 
 exports.digitalD = digitalD;

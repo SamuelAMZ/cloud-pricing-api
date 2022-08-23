@@ -1,5 +1,5 @@
+const { linodeArr } = require("../data.js");
 //   LINODE SCRAPPING
-
 const linodeN = async (page23) => {
   //  scrap general purposes
   const linode = await page23.evaluate(() => [
@@ -13,7 +13,15 @@ const linodeN = async (page23) => {
     },
   ]);
 
-  console.log(linode);
+  // console.log(linode);
+
+  const data = {
+    networking: {
+      nodeBalancers: linode,
+    },
+  };
+
+  linodeArr(data);
 };
 
 exports.linodeN = linodeN;

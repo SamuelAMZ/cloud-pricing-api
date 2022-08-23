@@ -1,5 +1,7 @@
+const { awsArr } = require("../data.js");
+
 const aws = async (page6) => {
-  // select 100 results
+  const computeData = [];
 
   const test = async () => {
     await page6.select(
@@ -25,8 +27,7 @@ const aws = async (page6) => {
       }))
     );
 
-    // put to the database from here
-    console.log(awsAll);
+    computeData.push(awsAll);
   };
 
   const heading1 = await page6.$eval(
@@ -46,6 +47,12 @@ const aws = async (page6) => {
     await page6.click("#productList > nav > a.pagination-link.pagination-next");
     await page6.waitForTimeout(4000);
   }
+
+  const data = {
+    compute: { computeData },
+  };
+
+  awsArr(data);
 };
 
 exports.aws = aws;

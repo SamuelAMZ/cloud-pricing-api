@@ -1,3 +1,5 @@
+const { ovhArr } = require("../data.js");
+
 const ovhS = async (page9) => {
   //  scrap block  storage
   const ovhBS = await page9.evaluate(() =>
@@ -27,7 +29,16 @@ const ovhS = async (page9) => {
     }))
   );
 
-  console.log(ovhBS, ovhOS);
+  // console.log(ovhBS, ovhOS);
+
+  const data = {
+    storage: {
+      blockStorage: ovhBS,
+      objectStorage: ovhOS,
+    },
+  };
+
+  ovhArr(data);
 };
 
 exports.ovhS = ovhS;

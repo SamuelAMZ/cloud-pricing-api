@@ -1,3 +1,5 @@
+const { vultrArr } = require("../data.js");
+
 const vultrD = async (page16) => {
   //  scrap Mysql
   const vultrMysql = await page16.evaluate(() =>
@@ -16,7 +18,14 @@ const vultrD = async (page16) => {
       price: item.querySelector("div:nth-child(6)").innerText,
     }))
   );
-  console.log(vultrMysql);
+
+  const data = {
+    database: {
+      generalPurpose: vultrMysql,
+    },
+  };
+
+  vultrArr(data);
 };
 
 exports.vultrD = vultrD;

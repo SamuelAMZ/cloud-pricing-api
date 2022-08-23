@@ -1,12 +1,14 @@
+const { vultrArr } = require("../data.js");
+
 const vultrS = async (page11) => {
   //  scrap block storage
   const vultrBS = await page11.evaluate(() => [
     {
       baseStorage: document.querySelector(
-        "#block-storage > div > div > div > div > div > div.bs-calculator__content > div > div:nth-child(2) > div.value > span.storage-calculator__input"
+        "#block-storage > div > div > div > div > div > div.bs-calculator__content > div > div:nth-child(2) > div.value"
       ).innerText,
       basePrice: document.querySelector(
-        "#block-storage > di > div > div > div > div > div.bs-calculator__content > div > div:nth-child(1) > div.value.value-price > span:nth-child(1)"
+        "#block-storage > div > div > div > div > div > div.bs-calculator__content > div > div:nth-child(1) > div.value.value-price > span:nth-child(1)"
       ).innerText,
       base: "10 GB at 1.00",
     },
@@ -25,7 +27,14 @@ const vultrS = async (page11) => {
     },
   ]);
 
-  console.log(vultrBS, vultrOS);
+  const data = {
+    storage: {
+      blockStorage: vultrBS,
+      objectStorage: vultrOS,
+    },
+  };
+
+  vultrArr(data);
 };
 
 exports.vultrS = vultrS;

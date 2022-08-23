@@ -1,3 +1,5 @@
+const { digitalArr } = require("../data.js");
+
 const digitalS = async (page10) => {
   //  scrap general purposes
   const digitalBS = await page10.evaluate(() =>
@@ -14,7 +16,15 @@ const digitalS = async (page10) => {
     }))
   );
 
-  console.log(digitalBS);
+  // console.log(digitalBS);
+
+  const data = {
+    storage: {
+      blockStorage: digitalBS,
+    },
+  };
+
+  digitalArr(data);
 };
 
 exports.digitalS = digitalS;

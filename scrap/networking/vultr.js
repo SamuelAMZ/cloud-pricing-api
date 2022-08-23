@@ -1,3 +1,5 @@
+const { vultrArr } = require("../data.js");
+
 //   VULTR SCRAPPING
 
 const vultrN = async (page25) => {
@@ -11,7 +13,13 @@ const vultrN = async (page25) => {
     },
   ]);
 
-  console.log(vultr);
+  const data = {
+    networking: {
+      nodeBalancers: vultr,
+    },
+  };
+
+  vultrArr(data);
 };
 
 exports.vultrN = vultrN;

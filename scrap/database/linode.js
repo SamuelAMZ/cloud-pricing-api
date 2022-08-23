@@ -1,3 +1,5 @@
+const { linodeArr } = require("../data.js");
+
 //   LINODE SCRAPPING
 const linodeD = async (page13) => {
   //  scrap postgres
@@ -43,7 +45,17 @@ const linodeD = async (page13) => {
   linodeMysql.push({ name: "mysql" });
   linodeMongo.push({ name: "mongoDB" });
 
-  console.log(linodePostgres, linodeMysql, linodeMongo);
+  // console.log(linodePostgres, linodeMysql, linodeMongo);
+
+  const data = {
+    database: {
+      postgres: linodePostgres,
+      mysql: linodeMysql,
+      mongo: linodeMongo,
+    },
+  };
+
+  linodeArr(data);
 };
 
 exports.linodeD = linodeD;

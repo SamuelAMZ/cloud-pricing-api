@@ -1,5 +1,7 @@
+const { azureArr } = require("../data.js");
+
 const azure = async (page7) => {
-  // select 100 results
+  const computeData = [];
 
   const test = async () => {
     await page7.select(
@@ -25,8 +27,7 @@ const azure = async (page7) => {
       }))
     );
 
-    // put to the database from here
-    console.log(azureAll);
+    computeData.push(azureAll);
   };
 
   const heading1 = await page7.$eval(
@@ -46,6 +47,12 @@ const azure = async (page7) => {
     await page7.click("#productList > nav > a.pagination-link.pagination-next");
     await page7.waitForTimeout(4000);
   }
+
+  const data = {
+    compute: { computeData },
+  };
+
+  azureArr(data);
 };
 
 exports.azure = azure;

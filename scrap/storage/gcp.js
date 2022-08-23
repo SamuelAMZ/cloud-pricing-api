@@ -1,3 +1,5 @@
+const { gcpArr } = require("../data.js");
+
 const gcpS = async () => {
   const constantS = 0.02; //standard storage
   const constantN = 0.01; //nearline storage
@@ -34,7 +36,15 @@ const gcpS = async () => {
     },
   ];
 
-  console.log(standard, nearline);
+  // console.log(standard, nearline);
+  const data = {
+    storage: {
+      standard: standard,
+      nearline: nearline,
+    },
+  };
+
+  gcpArr(data);
 };
 
 exports.gcpS = gcpS;

@@ -1,3 +1,5 @@
+const { ovhArr } = require("../data.js");
+
 const ovh = async (page2) => {
   //  scrap general purposes
   const ovhGP = await page2.evaluate(() =>
@@ -53,14 +55,15 @@ const ovh = async (page2) => {
     }))
   );
 
-  console.log(
-    "---OVH COMPUTE---",
-    ovhGP,
-    "---OVH COMPUTE---",
-    ovhCP,
-    "---OVH COMPUTE---",
-    ovhRM
-  );
+  const data = {
+    compute: {
+      generalPurpose: ovhGP,
+      cpuOptimized: ovhCP,
+      ramOptimized: ovhRM,
+    },
+  };
+
+  ovhArr(data);
 };
 
 exports.ovh = ovh;

@@ -1,5 +1,6 @@
-//   DIGITAL OCEAN SCRAPPING
+const { digitalArr } = require("../data.js");
 
+//   DIGITAL OCEAN SCRAPPING
 const digitalN = async (page24) => {
   //  scrap general purposes
   const digital = await page24.evaluate(() => [
@@ -13,7 +14,15 @@ const digitalN = async (page24) => {
     },
   ]);
 
-  console.log(digital);
+  // console.log(digital);
+
+  const data = {
+    networking: {
+      nodeBalancers: digital,
+    },
+  };
+
+  digitalArr(data);
 };
 
 exports.digitalN = digitalN;

@@ -25,10 +25,7 @@ const databaseDigital = require("./database/digitalOcean");
 const databaseVultr = require("./database/vultr");
 const databaseGcp = require("./database/gcp");
 const databaseAws = require("./database/aws");
-const databaseAwsMongo = require("./database/_aws-mongo");
 const databaseAzure = require("./database/azure");
-const databaseAzureMysql = require("./database/_azure-mysql");
-const databaseAzureMongo = require("./database/_azure-mongo");
 // networking
 const networkingLinode = require("./networking/linode");
 const networkingDigital = require("./networking/digitalOcean");
@@ -47,272 +44,256 @@ puppeteer.use(StealthPlugin());
     headless: false,
   });
 
-  //  LINODE SCRAPPING
+  // -------- LINODE SCRAPPING ----------
+  // LINODE COMPUTE SCRAPPING
   const page1 = await browser.newPage();
+  await page1.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
   try {
-    await page1.goto(process.env.LINK_LINODE);
+    await page1.goto(process.env.LINK_LINODE, {
+      waitUntil: "networkidle2",
+    });
     await computeLinode.linode(page1);
   } catch (error) {
-    console.log(error.message);
+    console.log(`linode compute error ${error.message}`);
+  }
+  // LINODE STORAGE SCRAPPING
+  try {
+    await storageLinode.linodeS(page1);
+  } catch (error) {
+    console.log(`linode storage error ${error.message}`);
+  }
+  // LINODE DATABASE SCRAPPING
+  try {
+    await databaseLinode.linodeD(page1);
+  } catch (error) {
+    console.log(`linode database error ${error.message}`);
+  }
+  // LINODE NETWORKING SCRAPPING
+  try {
+    await networkingLinode.linodeN(page1);
+  } catch (error) {
+    console.log(`linode networking error ${error.message}`);
   }
 
-  // OVH SCRAPPING
+  // -------- OVH SCRAPPING ----------
+  // OVH COMPUTE SCRAPPING
   const page2 = await browser.newPage();
+  await page2.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
   try {
-    await page2.goto(process.env.LINK_OVH);
+    await page2.goto(process.env.LINK_OVH, {
+      waitUntil: "networkidle2",
+    });
     await computeOvh.ovh(page2);
   } catch (error) {
-    console.log(error.message);
+    console.log(`ovh compute error ${error.message}`);
+  }
+  // OVH STORAGE SCRAPPING
+  try {
+    await storageOvh.ovhS(page2);
+  } catch (error) {
+    console.log(`ovh storage error ${error.message}`);
+  }
+  // OVH DATABASE SCRAPPING
+  try {
+    await databaseOvh.ovhD(page2);
+  } catch (error) {
+    console.log(`ovh database error ${error.message}`);
+  }
+  // OVH NETWORKING SCRAPPING
+  try {
+    await networkingOvh.ovhN(page2);
+  } catch (error) {
+    console.log(`ovh networking error ${error.message}`);
   }
 
-  // DIGITAL SCRAPPING
+  // -------- VULTR SCRAPPING ----------
+  // VULTR COMPUTE SCRAPPING
   const page3 = await browser.newPage();
+  await page3.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
   try {
-    await page3.goto(process.env.LINK_DIGITAL_COMPUTE);
-    await computeDigital.digital(page3);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // VULTR SCRAPPING
-  const page4 = await browser.newPage();
-  try {
-    await page4.goto(process.env.LINK_VULTR);
-    await computeVultr.vultr(page4);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // GCP SCRAPPING
-  const page5 = await browser.newPage();
-  try {
-    await page5.goto(process.env.LINK_HOLORI_GOOGLE, {
+    await page3.goto(process.env.LINK_VULTR, {
       waitUntil: "networkidle2",
     });
-    await computeGcp.gcp(page5);
+    await computeVultr.vultr(page3);
   } catch (error) {
-    console.log(error.message);
+    console.log(`vultr compute error ${error.message}`);
+  }
+  // VULTR STORAGE SCRAPPING
+  try {
+    await storageVultr.vultrS(page3);
+  } catch (error) {
+    console.log(`vultr storage error ${error.message}`);
+  }
+  // VULTR DATABASE SCRAPPING
+  try {
+    await databaseVultr.vultrD(page3);
+  } catch (error) {
+    console.log(`vultr database error ${error.message}`);
+  }
+  // VULTR NETWORKING SCRAPPING
+  try {
+    await networkingVultr.vultrN(page3);
+  } catch (error) {
+    console.log(`vultr networking error ${error.message}`);
   }
 
-  // AWS SCRAPPING
+  // -------- DIGITAL SCRAPPING ----------
+  // // DIGITAL COMPUTE SCRAPPING
+  const page4 = await browser.newPage();
+  await page4.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page4.goto(process.env.LINK_DIGITAL_COMPUTE);
+    await computeDigital.digital(page4);
+  } catch (error) {
+    console.log(`digital compute error ${error.message}`);
+  }
+  // DIGITAL STORAGE SCRAPPING
+  const page5 = await browser.newPage();
+  await page5.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page5.goto(process.env.LINK_DIGITAL_STORAGE, {
+      waitUntil: "networkidle2",
+    });
+    await storageDigital.digitalS(page5);
+  } catch (error) {
+    console.log(`digital storage error ${error.message}`);
+  }
+  // DIGITAL OCEAN DATABASE SCRAPPING
   const page6 = await browser.newPage();
   try {
-    await page6.goto(process.env.LINK_HOLORI_AWS, {
+    await page6.goto(process.env.LINK_DIGITAL_DATABASE, {
       waitUntil: "networkidle2",
     });
-    await computeAws.aws(page6);
+    await databaseDigital.digitalD(page6);
   } catch (error) {
-    console.log(error.message);
+    console.log(`digital database error ${error.message}`);
   }
-
-  // AZURE SCRAPPING
+  // DIGITAL NETWORKING SCRAPPING
   const page7 = await browser.newPage();
   try {
-    await page7.goto(process.env.LINK_HOLORI_AZURE, {
-      waitUntil: "networkidle2",
-    });
-    await computeAzure.azure(page7);
+    await page7.goto(process.env.LINK_DIGITAL_NETWORKING);
+    await networkingDigital.digitalN(page7);
   } catch (error) {
-    console.log(error.message);
+    console.log(`digital networking error ${error.message}`);
   }
 
-  // :::::::: STORAGE START HERE  ::::::::::::
-
-  // LINODE STORAGE SCRAPPING
+  // -------- GCP SCRAPPING ----------
+  // GCP COMPUTE SCRAPPING
   const page8 = await browser.newPage();
+  await page8.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
   try {
-    await page8.goto(process.env.LINK_LINODE, {
+    await page8.goto(process.env.LINK_HOLORI_GOOGLE, {
       waitUntil: "networkidle2",
     });
-    await storageLinode.linodeS(page8);
+    await computeGcp.gcp(page8);
   } catch (error) {
-    console.log(error.message);
+    console.log(`gcp compute error ${error.message}`);
   }
-
-  // OVH STORAGE SCRAPPING
-  const page9 = await browser.newPage();
-  try {
-    await page9.goto(process.env.LINK_OVH, {
-      waitUntil: "networkidle2",
-    });
-    await storageOvh.ovhS(page9);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // DIGITAL STORAGE SCRAPPING
-  const page10 = await browser.newPage();
-  try {
-    await page10.goto(process.env.LINK_DIGITAL_STORAGE, {
-      waitUntil: "networkidle2",
-    });
-    await storageDigital.digitalS(page10);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // VULTR STORAGE SCRAPPING
-  const page11 = await browser.newPage();
-  try {
-    await page11.goto(process.env.LINK_VULTR);
-    await storageVultr.vultrS(page11);
-  } catch (error) {
-    console.log(error.message);
-  }
-
   // GCP STORAGE SCRAPPING
   await storageGcp.gcpS();
+  // GCP DATABASE SCRAPPING
+  const page9 = await browser.newPage();
+  try {
+    await page9.goto(process.env.LINK_MONGO);
+    await databaseGcp.gcpD(page9);
+  } catch (error) {
+    console.log(`gcp database error ${error.message}`);
+  }
+  // GCP NETWORKING SCRAPPING
+  await networkingGcp.gcpN();
 
+  // -------- AWS SCRAPPING ----------
+  // AWS COMPUTE SCRAPPING
+  const page10 = await browser.newPage();
+  await page10.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page10.goto(process.env.LINK_HOLORI_AWS, {
+      waitUntil: "networkidle2",
+    });
+    await computeAws.aws(page10);
+  } catch (error) {
+    console.log(`aws compute error ${error.message}`);
+  }
   // AWS STORAGE SCRAPPING
   await storageAws.awsS();
-
-  // AZURE STORAGE SCRAPPING
-  const page12 = await browser.newPage();
+  // AWS DATABASE SCRAPPING
+  const page11 = await browser.newPage();
   try {
-    await page12.goto(process.env.LINK_AZURE_STORAGE, {
+    await page11.goto(process.env.LINK_VANTAGE);
+    await databaseAws.awsD(page11);
+  } catch (error) {
+    console.log(`aws database error ${error.message}`);
+  }
+  // AWS NETWORKING SCRAPPING
+  await networkingAws.awsN();
+
+  // -------- AZURE SCRAPPING ----------
+  // AZURE COMPUTE SCRAPPING
+  const page12 = await browser.newPage();
+  await page12.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page12.goto(process.env.LINK_HOLORI_AZURE, {
       waitUntil: "networkidle2",
     });
-    await storageAzure.azureS(page12);
+    await computeAzure.azure(page12);
   } catch (error) {
-    console.log(error.message);
+    console.log(`azure compute error ${error.message}`);
   }
-
-  // :::::::: DATABASE START HERE  ::::::::::::
-
-  // LINODE DATABASE SCRAPPING
+  // AZURE STORAGE SCRAPPING
   const page13 = await browser.newPage();
   try {
-    await page13.goto(process.env.LINK_LINODE, {
+    await page13.goto(process.env.LINK_AZURE_STORAGE, {
       waitUntil: "networkidle2",
     });
-    await databaseLinode.linodeD(page13);
+    await storageAzure.azureS(page13);
   } catch (error) {
-    console.log(error.message);
-  }
-
-  // OVH DATABASE SCRAPPING
-  const page14 = await browser.newPage();
-  try {
-    await page14.goto(process.env.LINK_OVH, {
-      waitUntil: "networkidle2",
-    });
-    await databaseOvh.ovhD(page14);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // DIGITAL OCEAN DATABASE SCRAPPING
-  const page15 = await browser.newPage();
-  try {
-    await page15.goto(process.env.LINK_DIGITAL_DATABASE, {
-      waitUntil: "networkidle2",
-    });
-    await databaseDigital.digitalD(page15);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // VULTR DATABASE SCRAPPING
-  const page16 = await browser.newPage();
-  try {
-    await page16.goto(process.env.LINK_VULTR);
-    await databaseVultr.vultrD(page16);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // GCP DATABASE SCRAPPING
-  const page17 = await browser.newPage();
-  try {
-    // https://cloud.google.com/sql/docs/postgres/pricing
-    await page17.goto(process.env.LINK_MONGO);
-    await databaseGcp.gcpD(page17);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // AWS DATABASE SCRAPPING
-  const page18 = await browser.newPage();
-  try {
-    await page18.goto(process.env.LINK_VANTAGE);
-    await databaseAws.awsD(page18);
-  } catch (error) {
-    console.log(error.message);
-  }
-  // aws mongo subwork
-  const page19 = await browser.newPage();
-  try {
-    await page19.goto(process.env.LINK_MONGO);
-    await databaseAwsMongo.awsMd(page19);
-  } catch (error) {
-    console.log(error.message);
+    console.log(`azure storage error ${error.message}`);
   }
   // AZURE DATABASE SCRAPPING
   const page20 = await browser.newPage();
+  await page20.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
   try {
     await page20.goto(process.env.LINK_AZURE_POSTGRES);
     await databaseAzure.azureD(page20);
   } catch (error) {
-    console.log(error.message);
+    console.log(`azure database error ${error.message}`);
   }
-  // mysql azure
-  const page21 = await browser.newPage();
-  try {
-    await page21.goto(process.env.LINK_AZURE_MYSQL);
-    await databaseAzureMysql.azureDm(page21);
-  } catch (error) {
-    console.log(error.message);
-  }
-  // azure mongo subwork
-  const page22 = await browser.newPage();
-  try {
-    await page22.goto(process.env.LINK_MONGO);
-    await databaseAzureMongo.azureMd(page22);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // LINODE NETWORKING SCRAPPING
-  const page23 = await browser.newPage();
-  try {
-    await page23.goto(process.env.LINK_LINODE);
-    await networkingLinode.linodeN(page23);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // DIGITAL NETWORKING SCRAPPING
-  const page24 = await browser.newPage();
-  try {
-    await page24.goto(process.env.LINK_DIGITAL_NETWORKING);
-    await networkingDigital.digitalN(page24);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // VULTR NETWORKING SCRAPPING
-  const page25 = await browser.newPage();
-  try {
-    await page25.goto(process.env.LINK_VULTR);
-    await networkingVultr.vultrN(page25);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // OVH NETWORKING SCRAPPING
-  const page26 = await browser.newPage();
-  try {
-    await page26.goto(process.env.LINK_OVH);
-    await networkingOvh.ovhN(page26);
-  } catch (error) {
-    console.log(error.message);
-  }
-
-  // GCP NETWORKING SCRAPPING
-  await networkingGcp.gcpN();
-
-  // AWS NETWORKING SCRAPPING
-  await networkingAws.awsN();
 
   // AZURE NETWORKING SCRAPPING
   await networkingAzure.azureN();

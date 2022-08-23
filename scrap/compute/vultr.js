@@ -1,3 +1,5 @@
+const { vultrArr } = require("../data.js");
+
 const vultr = async (page4) => {
   //  scrap general purposes
   const vultrGP = await page4.evaluate(() =>
@@ -56,14 +58,15 @@ const vultr = async (page4) => {
     }))
   );
 
-  console.log(
-    "--vultr COMPUTER--",
-    vultrGP,
-    "--vultr COMPUTER--",
-    vultrCP,
-    "--vultr COMPUTER--",
-    vultrRM
-  );
+  const data = {
+    compute: {
+      generalPurpose: vultrGP,
+      cpuOptimized: vultrCP,
+      ramOptimized: vultrRM,
+    },
+  };
+
+  vultrArr(data);
 };
 
 exports.vultr = vultr;

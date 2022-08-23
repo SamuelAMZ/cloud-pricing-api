@@ -1,5 +1,5 @@
+const { linodeArr } = require("../data.js");
 //   LINODE SCRAPPING
-
 const linodeS = async (page8) => {
   //  scrap block storage
   const linodeBS = await page8.evaluate(() =>
@@ -25,7 +25,16 @@ const linodeS = async (page8) => {
     }))
   );
 
-  console.log(linodeBS, linodeOS);
+  // console.log(linodeBS, linodeOS);
+
+  const data = {
+    storage: {
+      blockStorage: linodeBS,
+      objectStorage: linodeOS,
+    },
+  };
+
+  linodeArr(data);
 };
 
 exports.linodeS = linodeS;

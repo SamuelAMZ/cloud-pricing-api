@@ -1,3 +1,5 @@
+const { digitalArr } = require("../data.js");
+
 const digital = async (page3) => {
   //  scrap general purposes
   const digitalGP = await page3.evaluate(() =>
@@ -56,14 +58,15 @@ const digital = async (page3) => {
     }))
   );
 
-  console.log(
-    "--DIGITAL COMPUTER--",
-    digitalGP,
-    "--DIGITAL COMPUTER--",
-    digitalCP,
-    "--DIGITAL COMPUTER--",
-    digitalRM
-  );
+  const data = {
+    compute: {
+      generalPurpose: digitalGP,
+      cpuOptimized: digitalCP,
+      ramOptimized: digitalRM,
+    },
+  };
+
+  digitalArr(data);
 };
 
 exports.digital = digital;
