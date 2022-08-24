@@ -4,16 +4,23 @@ const linodeN = async (page23) => {
   //  scrap general purposes
   const linode = await page23.evaluate(() => [
     {
-      provider: "Linode",
-      price: document
+      title: "1 node",
+      pricePerHour: document
         .querySelector(
           "#nodebalancers > div > div > div > div > div > div.fl-module.fl-module-html.fl-node-7zpxsw92gvao.js-hidden.js-tab--slidertab.js-tab--nanodes.active > div > div > div > div > div.c-price-slider__detail"
         )
-        .innerText.replace("$", "$ 0"),
+        .innerText.replace("$", "0")
+        .replace("/hr", "")
+        .trim(),
     },
   ]);
 
-  // console.log(linode);
+  linode.push({
+    type: "node balancers",
+    currency: "$",
+  });
+
+  console.log(linode);
 
   const data = {
     networking: {

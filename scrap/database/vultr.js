@@ -8,16 +8,32 @@ const vultrD = async (page16) => {
         "#storage-optimized > div:nth-child(5) > div > div.pt__body.js-body > div"
       )
     ).map((item) => ({
-      type:
+      title:
         "vultr" +
         item
           .querySelector(".pt__cell:first-child")
           .innerText.replace("GB", "")
           .trim(),
-      size: item.querySelector(".pt__cell:first-child").innerText,
-      price: item.querySelector("div:nth-child(6)").innerText,
+      size: item
+        .querySelector(".pt__cell:first-child")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("div:nth-child(6)")
+        .innerText.replace("/hr", "")
+        .replace("$", "")
+        .trim(),
     }))
   );
+
+  vultrMysql.push({
+    type: "mysql",
+    currency: "$",
+    size: "GB",
+  });
+
+  // console.log(vultrMysql);
 
   const data = {
     database: {

@@ -6,9 +6,13 @@ const awsD = async (page18) => {
     Array.from(
       Array.from(document.querySelectorAll("#data > tbody"))[0].children
     ).map((item) => ({
-      type: item.querySelector("td.apiname").innerText,
-      size: item.querySelector("td.memory").innerText,
-      price: item.querySelector("td.cost-ondemand-14").innerText,
+      title: item.querySelector("td.apiname").innerText,
+      size: item.querySelector("td.memory").innerText.replace("GiB", "").trim(),
+      pricePerHour: item
+        .querySelector("td.cost-ondemand-14")
+        .innerText.replace("$", "")
+        .replace("hourly", "")
+        .trim(),
     }))
   );
 
@@ -17,9 +21,13 @@ const awsD = async (page18) => {
     Array.from(
       Array.from(document.querySelectorAll("#data > tbody"))[0].children
     ).map((item) => ({
-      type: item.querySelector("td.apiname").innerText,
-      size: item.querySelector("td.memory").innerText,
-      price: item.querySelector("td.cost-ondemand-2").innerText,
+      title: item.querySelector("td.apiname").innerText,
+      size: item.querySelector("td.memory").innerText.replace("GiB", "").trim(),
+      pricePerHour: item
+        .querySelector("td.cost-ondemand-2")
+        .innerText.replace("$", "")
+        .replace("hourly", "")
+        .trim(),
     }))
   );
 
@@ -46,11 +54,36 @@ const awsD = async (page18) => {
         )
       )[0].children
     ).map((item) => ({
-      type: item.querySelector("tr td:nth-child(1)").innerText,
-      size: item.querySelector("tr td:nth-child(3)").innerText,
-      price: item.querySelector("tr td:nth-child(5)").innerText,
+      title: item.querySelector("tr td:nth-child(1)").innerText,
+      size: item
+        .querySelector("tr td:nth-child(3)")
+        .innerText.replace("GB", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr td:nth-child(5)")
+        .innerText.replace("$", "")
+        .replace("/hr", "")
+        .trim(),
     }))
   );
+
+  postgres.push({
+    type: "postgres",
+    currency: "$",
+    size: "GB",
+  });
+  mysql.push({
+    type: "mysql",
+    currency: "$",
+    size: "GB",
+  });
+  mongo.push({
+    type: "mongoDB",
+    currency: "$",
+    size: "GB",
+  });
+
+  // console.log(postgres, mysql, mongo);
 
   const data = {
     database: {

@@ -10,11 +10,22 @@ const digitalS = async (page10) => {
         )
       )[0].children
     ).map((item) => ({
-      storage: item.querySelector("tr td:nth-child(1)").innerText,
-      price: item.querySelector("tr td:nth-child(3)").innerText,
-      pricePerHour: item.querySelector("tr td:nth-child(2)").innerText,
+      storage: item
+        .querySelector("tr td:nth-child(1)")
+        .innerText.replace("GB", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector("tr td:nth-child(3)")
+        .innerText.replace("$", "")
+        .trim(),
     }))
   );
+
+  digitalBS.push({
+    type: "block storage",
+    currency: "$",
+    size: "GB",
+  });
 
   // console.log(digitalBS);
 

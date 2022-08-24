@@ -19,19 +19,16 @@ const azureS = async (page12) => {
 
     return [
       {
-        type: "premium",
-        storage: 100,
-        price: (100 * perOne).toFixed(3),
+        storage: "100",
+        pricePerMo: (100 * perOne).toFixed(3),
       },
       {
-        type: "premium",
-        storage: 500,
-        price: (500 * perOne).toFixed(3),
+        storage: "500",
+        pricePerMo: (500 * perOne).toFixed(3),
       },
       {
-        type: "premium",
-        storage: 1000,
-        price: (1000 * perOne).toFixed(3),
+        storage: "1000",
+        pricePerMo: (1000 * perOne).toFixed(3),
       },
     ];
   });
@@ -60,24 +57,32 @@ const azureS = async (page12) => {
 
     return [
       {
-        type: "standard",
-        storage: 100,
-        price: (100 * perOne).toFixed(3),
+        storage: "100",
+        pricePerMo: (100 * perOne).toFixed(3),
       },
       {
-        type: "standard",
-        storage: 500,
-        price: (500 * perOne).toFixed(3),
+        storage: "500",
+        pricePerMo: (500 * perOne).toFixed(3),
       },
       {
-        type: "standard",
-        storage: 1000,
-        price: (1000 * perOne).toFixed(3),
+        storage: "1000",
+        pricePerMo: (1000 * perOne).toFixed(3),
       },
     ];
   });
 
-  // console.log(AzureP, AzureS);
+  AzureP.push({
+    type: "premium",
+    currency: "$",
+    size: "GB",
+  });
+  AzureS.push({
+    type: "standard",
+    currency: "$",
+    size: "GB",
+  });
+
+  console.log(AzureP, AzureS);
 
   const data = {
     storage: {

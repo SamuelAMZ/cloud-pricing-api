@@ -10,13 +10,45 @@ const vultr = async (page4) => {
         )
       )[0].children
     ).map((item) => ({
-      title: "vultr " + item.querySelector(".js-price:nth-child(1)").innerText,
-      pricePerHour: item.querySelector(".js-price:nth-child(6)").innerText,
-      pricePerMo: item.querySelector(".js-price:nth-child(5)").innerText,
-      ram: item.querySelector(".js-price:nth-child(2)").innerText,
-      cpu: item.querySelector(".js-price:nth-child(1)").innerText,
-      storage: item.querySelector(".js-price:nth-child(4)").innerText,
-      transfer: item.querySelector(".js-price:nth-child(3)").innerText,
+      title:
+        "vultr " +
+        item
+          .querySelector(".js-price:nth-child(1)")
+          .innerText.replace("\n", "")
+          .trim(),
+      pricePerHour: item
+        .querySelector(".js-price:nth-child(6)")
+        .innerText.replace("\n", "")
+        .replace("/hr", "")
+        .replace("$", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector(".js-price:nth-child(5)")
+        .innerText.replace("\n", "")
+        .replace("/mo", "")
+        .replace("$", "")
+        .trim(),
+      ram: item
+        .querySelector(".js-price:nth-child(2)")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector(".js-price:nth-child(1)")
+        .innerText.replace("\n", "")
+        .replace("vCPU", "")
+        .trim(),
+      storage: item
+        .querySelector(".js-price:nth-child(4)")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      transfer: item
+        .querySelector(".js-price:nth-child(3)")
+        .innerText.replace("\n", "")
+        .replace(" ", "")
+        .replace("TB", "000")
+        .trim(),
     }))
   );
 
@@ -29,13 +61,45 @@ const vultr = async (page4) => {
         )
       )[0].children
     ).map((item) => ({
-      title: "vultr " + item.querySelector(".js-price:nth-child(1)").innerText,
-      pricePerHour: item.querySelector(".js-price:nth-child(6)").innerText,
-      pricePerMo: item.querySelector(".js-price:nth-child(5)").innerText,
-      ram: item.querySelector(".js-price:nth-child(2)").innerText,
-      cpu: item.querySelector(".js-price:nth-child(1)").innerText,
-      storage: item.querySelector(".js-price:nth-child(4)").innerText,
-      transfer: item.querySelector(".js-price:nth-child(3)").innerText,
+      title:
+        "vultr " +
+        item
+          .querySelector(".js-price:nth-child(1)")
+          .innerText.replace("\n", "")
+          .trim(),
+      pricePerHour: item
+        .querySelector(".js-price:nth-child(6)")
+        .innerText.replace("\n", "")
+        .replace("/hr", "")
+        .replace("$", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector(".js-price:nth-child(5)")
+        .innerText.replace("\n", "")
+        .replace("/mo", "")
+        .replace("$", "")
+        .trim(),
+      ram: item
+        .querySelector(".js-price:nth-child(2)")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector(".js-price:nth-child(1)")
+        .innerText.replace("\n", "")
+        .replace("vCPU", "")
+        .trim(),
+      storage: item
+        .querySelector(".js-price:nth-child(4)")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      transfer: item
+        .querySelector(".js-price:nth-child(3)")
+        .innerText.replace("\n", "")
+        .replace(" ", "")
+        .replace("TB", "000")
+        .trim(),
     }))
   );
 
@@ -48,15 +112,80 @@ const vultr = async (page4) => {
         )
       )[0].children
     ).map((item) => ({
-      title: "vultr " + item.querySelector(".js-price:nth-child(1)").innerText,
-      pricePerHour: item.querySelector(".js-price:nth-child(6)").innerText,
-      pricePerMo: item.querySelector(".js-price:nth-child(5)").innerText,
-      ram: item.querySelector(".js-price:nth-child(2)").innerText,
-      cpu: item.querySelector(".js-price:nth-child(1)").innerText,
-      storage: item.querySelector(".js-price:nth-child(4)").innerText,
-      transfer: item.querySelector(".js-price:nth-child(3)").innerText,
+      title:
+        "vultr " +
+        item
+          .querySelector(".js-price:nth-child(1)")
+          .innerText.replace("\n", "")
+          .trim(),
+      pricePerHour: item
+        .querySelector(".js-price:nth-child(6)")
+        .innerText.replace("\n", "")
+        .replace("/hr", "")
+        .replace("$", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector(".js-price:nth-child(5)")
+        .innerText.replace("\n", "")
+        .replace("/mo", "")
+        .replace("$", "")
+        .trim(),
+      ram: item
+        .querySelector(".js-price:nth-child(2)")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector(".js-price:nth-child(1)")
+        .innerText.replace("\n", "")
+        .replace("vCPU", "")
+        .trim(),
+      storage: item
+        .querySelector(".js-price:nth-child(4)")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      transfer: item
+        .querySelector(".js-price:nth-child(3)")
+        .innerText.replace("\n", "")
+        .replace(" ", "")
+        .replace("TB", "000")
+        .trim(),
     }))
   );
+
+  vultrGP.push({
+    type: "general purpose",
+    currency: "$",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "TB",
+    },
+  });
+  vultrCP.push({
+    type: "cpu optimized",
+    currency: "$",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "TB",
+    },
+  });
+  vultrRM.push({
+    type: "ram optimized",
+    currency: "$",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "TB",
+    },
+  });
+
+  // console.log(vultrGP, vultrCP, vultrRM);
 
   const data = {
     compute: {

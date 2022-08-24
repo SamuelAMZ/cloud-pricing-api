@@ -20,10 +20,16 @@ const azure = async (page7) => {
         )[0].children
       ).map((item) => ({
         title: item.querySelector("td:nth-child(2)").innerText,
-        pricePerHour: item.querySelector("td:nth-child(8)").innerText,
-        ram: item.querySelector("td:nth-child(4)").innerText,
+        pricePerHour: item
+          .querySelector("td:nth-child(8)")
+          .innerText.replace("$US", "")
+          .trim(),
+        ram: item
+          .querySelector("td:nth-child(4)")
+          .innerText.replace("GB", "")
+          .trim(),
         cpu: item.querySelector("td:nth-child(3)").innerText,
-        storage: item.querySelector("td:nth-child(5)").innerText,
+        storage: "depend - optional",
       }))
     );
 
@@ -43,10 +49,20 @@ const azure = async (page7) => {
     await test();
 
     console.log(Math.floor(Number(heading1) - Number(heading1) / 2 - 1));
+    // console.log(computeData);
 
     await page7.click("#productList > nav > a.pagination-link.pagination-next");
     await page7.waitForTimeout(4000);
   }
+
+  computeData.push({
+    type: "virtual machines",
+    currency: "$",
+    sizes: {
+      cpu: "vcpu",
+      ram: "GB",
+    },
+  });
 
   const data = {
     compute: { computeData },

@@ -10,12 +10,24 @@ const linode = async (page1) => {
       )
     ).map((item) => ({
       title: item.querySelector("th").innerText.trim(),
-      pricePerMo: item.querySelector(".col--mo").innerText.trim(),
-      pricePerHour: item.querySelector(".col--hr").innerText.trim(),
-      ram: item.querySelector(".col--ram").innerText.trim(),
+      pricePerMo: item
+        .querySelector(".col--mo")
+        .innerText.replace("$", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector(".col--hr")
+        .innerText.replace("$", "")
+        .trim(),
+      ram: item.querySelector(".col--ram").innerText.replace("GB", "").trim(),
       cpu: item.querySelector(".col--cpus").innerText.trim(),
-      storage: item.querySelector(".col--storage").innerText.trim(),
-      transfer: item.querySelector(".col--transfer").innerText.trim(),
+      storage: item
+        .querySelector(".col--storage")
+        .innerText.replace("GB", "")
+        .trim(),
+      transfer: item
+        .querySelector(".col--transfer")
+        .innerText.replace("TB", "")
+        .trim(),
     }))
   );
 
@@ -27,12 +39,24 @@ const linode = async (page1) => {
       )
     ).map((item) => ({
       title: item.querySelector("th").innerText.trim(),
-      pricePerMo: item.querySelector(".col--mo").innerText.trim(),
-      pricePerHour: item.querySelector(".col--hr").innerText.trim(),
-      ram: item.querySelector(".col--ram").innerText.trim(),
+      pricePerMo: item
+        .querySelector(".col--mo")
+        .innerText.replace("$", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector(".col--hr")
+        .innerText.replace("$", "")
+        .trim(),
+      ram: item.querySelector(".col--ram").innerText.replace("GB", "").trim(),
       cpu: item.querySelector(".col--cpus").innerText.trim(),
-      storage: item.querySelector(".col--storage").innerText.trim(),
-      transfer: item.querySelector(".col--transfer").innerText.trim(),
+      storage: item
+        .querySelector(".col--storage")
+        .innerText.replace("GB", "")
+        .trim(),
+      transfer: item
+        .querySelector(".col--transfer")
+        .innerText.replace("TB", "")
+        .trim(),
     }))
   );
 
@@ -44,14 +68,59 @@ const linode = async (page1) => {
       )
     ).map((item) => ({
       title: item.querySelector("th").innerText.trim(),
-      pricePerMo: item.querySelector(".col--mo").innerText.trim(),
-      pricePerHour: item.querySelector(".col--hr").innerText.trim(),
-      ram: item.querySelector(".col--ram").innerText.trim(),
+      pricePerMo: item
+        .querySelector(".col--mo")
+        .innerText.replace("$", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector(".col--hr")
+        .innerText.replace("$", "")
+        .trim(),
+      ram: item.querySelector(".col--ram").innerText.replace("GB", "").trim(),
       cpu: item.querySelector(".col--cpus").innerText.trim(),
-      storage: item.querySelector(".col--storage").innerText.trim(),
-      transfer: item.querySelector(".col--transfer").innerText.trim(),
+      storage: item
+        .querySelector(".col--storage")
+        .innerText.replace("GB", "")
+        .trim(),
+      transfer: item
+        .querySelector(".col--transfer")
+        .innerText.replace("TB", "")
+        .trim(),
     }))
   );
+
+  linodeGP.push({
+    type: "general purpose",
+    currency: "USD",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "TB",
+    },
+  });
+  linodeCP.push({
+    type: "cpu optimized",
+    currency: "USD",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "TB",
+    },
+  });
+  linodeRM.push({
+    type: "ram optimized",
+    currency: "USD",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "TB",
+    },
+  });
+
+  // console.log(linodeGP, linodeCP, linodeRM)
 
   const data = {
     compute: {

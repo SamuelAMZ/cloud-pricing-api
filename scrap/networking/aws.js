@@ -1,12 +1,20 @@
 const { awsArr } = require("../data.js");
 //   AWS SCRAPPING
 const awsN = async () => {
-  const aws = {
-    provider: "AWS",
-    price: "0,0225",
-  };
+  const aws = [
+    {
+      title: "1 node",
+      pricePerHour: "0,0225",
+    },
+  ];
 
-  // console.log(aws);
+  aws.push({
+    type: "node balancers",
+    currency: "$",
+  });
+
+  console.log(aws);
+
   const data = {
     networking: {
       nodeBalancers: aws,

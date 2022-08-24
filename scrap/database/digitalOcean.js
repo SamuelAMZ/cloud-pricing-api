@@ -10,9 +10,15 @@ const digitalD = async (page15) => {
         )
       )[0].children
     ).map((item) => ({
-      type: "Postgres " + item.querySelector("tr td:nth-child(1)").innerText,
-      size: item.querySelector("tr td:nth-child(1)").innerText,
-      price: item.querySelector("tr td:nth-child(6)").innerText,
+      Title: "Postgres " + item.querySelector("tr td:nth-child(1)").innerText,
+      size: item
+        .querySelector("tr td:nth-child(1)")
+        .innerText.replace("GB", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector("tr td:nth-child(6)")
+        .innerText.replace("$", "")
+        .trim(),
     }))
   );
 
@@ -25,9 +31,15 @@ const digitalD = async (page15) => {
         )
       )[0].children
     ).map((item) => ({
-      type: "Mysql " + item.querySelector("tr td:nth-child(1)").innerText,
-      size: item.querySelector("tr td:nth-child(1)").innerText,
-      price: item.querySelector("tr td:nth-child(6)").innerText,
+      title: "Mysql " + item.querySelector("tr td:nth-child(1)").innerText,
+      size: item
+        .querySelector("tr td:nth-child(1)")
+        .innerText.replace("GB", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector("tr td:nth-child(6)")
+        .innerText.replace("$", "")
+        .trim(),
     }))
   );
 
@@ -40,11 +52,33 @@ const digitalD = async (page15) => {
         )
       )[0].children
     ).map((item) => ({
-      type: "MongoDB " + item.querySelector("tr td:nth-child(1)").innerText,
-      size: item.querySelector("tr td:nth-child(1)").innerText,
-      price: item.querySelector("tr td:nth-child(6)").innerText,
+      title: "MongoDB " + item.querySelector("tr td:nth-child(1)").innerText,
+      size: item
+        .querySelector("tr td:nth-child(1)")
+        .innerText.replace("GB", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector("tr td:nth-child(6)")
+        .innerText.replace("$", "")
+        .trim(),
     }))
   );
+
+  digitalPostgres.push({
+    type: "postgres",
+    currency: "$",
+    size: "GB",
+  });
+  digitalMysql.push({
+    type: "mysql",
+    currency: "$",
+    size: "GB",
+  });
+  digitalMongo.push({
+    type: "mongoDB",
+    currency: "$",
+    size: "GB",
+  });
 
   // console.log(digitalPostgres, digitalMysql, digitalMongo);
 

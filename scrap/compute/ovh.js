@@ -11,11 +11,27 @@ const ovh = async (page2) => {
       )[0].children
     ).map((item) => ({
       title: item.querySelector("tr td:nth-child(1)").innerText,
-      pricePerHour: item.querySelector("tr td:nth-child(7)").innerText,
-      ram: item.querySelector("tr td:nth-child(2)").innerText,
+      pricePerHour: item
+        .querySelector("tr td:nth-child(7)")
+        .innerText.replace("€", "")
+        .replace("HT/heure", "")
+        .trim(),
+      ram: item
+        .querySelector("tr td:nth-child(2)")
+        .innerText.replace("Go", "")
+        .trim(),
       cpu: item.querySelector("tr td:nth-child(3)").innerText,
-      storage: item.querySelector("tr td:nth-child(4)").innerText,
-      transfer: item.querySelector("tr td:nth-child(5)").innerText,
+      storage: item
+        .querySelector("tr td:nth-child(4)")
+        .innerText.replace("Go", "")
+        .replace("SSD", "")
+        .trim(),
+      transfer: item
+        .querySelector("tr td:nth-child(5)")
+        .innerText.replace("Gbit/s", "")
+        .replace("garantis", "")
+        .replace("Mbit/s", "")
+        .trim(),
     }))
   );
 
@@ -29,11 +45,27 @@ const ovh = async (page2) => {
       )[0].children
     ).map((item) => ({
       title: item.querySelector("tr td:nth-child(1)").innerText,
-      pricePerHour: item.querySelector("tr td:nth-child(7)").innerText,
-      ram: item.querySelector("tr td:nth-child(2)").innerText,
+      pricePerHour: item
+        .querySelector("tr td:nth-child(7)")
+        .innerText.replace("€", "")
+        .replace("HT/heure", "")
+        .trim(),
+      ram: item
+        .querySelector("tr td:nth-child(2)")
+        .innerText.replace("Go", "")
+        .trim(),
       cpu: item.querySelector("tr td:nth-child(3)").innerText,
-      storage: item.querySelector("tr td:nth-child(4)").innerText,
-      transfer: item.querySelector("tr td:nth-child(5)").innerText,
+      storage: item
+        .querySelector("tr td:nth-child(4)")
+        .innerText.replace("Go", "")
+        .replace("SSD", "")
+        .trim(),
+      transfer: item
+        .querySelector("tr td:nth-child(5)")
+        .innerText.replace("Gbit/s", "")
+        .replace("garantis", "")
+        .replace("Mbit/s", "")
+        .trim(),
     }))
   );
 
@@ -47,13 +79,62 @@ const ovh = async (page2) => {
       )[0].children
     ).map((item) => ({
       title: item.querySelector("tr td:nth-child(1)").innerText,
-      pricePerHour: item.querySelector("tr td:nth-child(7)").innerText,
-      ram: item.querySelector("tr td:nth-child(2)").innerText,
+      pricePerHour: item
+        .querySelector("tr td:nth-child(7)")
+        .innerText.replace("€", "")
+        .replace("HT/heure", "")
+        .trim(),
+      ram: item
+        .querySelector("tr td:nth-child(2)")
+        .innerText.replace("Go", "")
+        .trim(),
       cpu: item.querySelector("tr td:nth-child(3)").innerText,
-      storage: item.querySelector("tr td:nth-child(4)").innerText,
-      transfer: item.querySelector("tr td:nth-child(5)").innerText,
+      storage: item
+        .querySelector("tr td:nth-child(4)")
+        .innerText.replace("Go", "")
+        .replace("SSD", "")
+        .trim(),
+      transfer: item
+        .querySelector("tr td:nth-child(5)")
+        .innerText.replace("Gbit/s", "")
+        .replace("garantis", "")
+        .replace("Mbit/s", "")
+        .trim(),
     }))
   );
+
+  ovhGP.push({
+    type: "general purpose",
+    currency: "€",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "GB/s",
+    },
+  });
+  ovhCP.push({
+    type: "cpu optimized",
+    currency: "€",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "GB/s",
+    },
+  });
+  ovhRM.push({
+    type: "ram optimized",
+    currency: "€",
+    sizes: {
+      cpu: "vcpu",
+      storage: "GB",
+      ram: "GB",
+      transfer: "GB/sec",
+    },
+  });
+
+  // console.log(ovhGP, ovhCP, ovhRM);
 
   const data = {
     compute: {

@@ -11,8 +11,15 @@ const ovhD = async (page14) => {
       )[0].children
     ).map((item) => ({
       type: item.querySelector("tr > td:nth-child(1)").innerText,
-      size: item.querySelector("tr > td:nth-child(2)").innerText,
-      price: item.querySelector("tr > td:nth-child(7)").innerText,
+      size: item
+        .querySelector("tr > td:nth-child(2)")
+        .innerText.replace("Go", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr > td:nth-child(7)")
+        .innerText.replace("€", "")
+        .replace("HT/heure/node", "")
+        .trim(),
     }))
   );
 
@@ -26,8 +33,15 @@ const ovhD = async (page14) => {
       )[0].children
     ).map((item) => ({
       type: item.querySelector("tr > td:nth-child(1)").innerText,
-      size: item.querySelector("tr > td:nth-child(2)").innerText,
-      price: item.querySelector("tr > td:nth-child(7)").innerText,
+      size: item
+        .querySelector("tr > td:nth-child(2)")
+        .innerText.replace("Go", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr > td:nth-child(7)")
+        .innerText.replace("€", "")
+        .replace("HT/heure/node", "")
+        .trim(),
     }))
   );
 
@@ -41,10 +55,35 @@ const ovhD = async (page14) => {
       )[0].children
     ).map((item) => ({
       type: item.querySelector("tr > td:nth-child(1)").innerText,
-      size: item.querySelector("tr > td:nth-child(2)").innerText,
-      price: item.querySelector("tr > td:nth-child(7)").innerText,
+      size: item
+        .querySelector("tr > td:nth-child(2)")
+        .innerText.replace("Go", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr > td:nth-child(7)")
+        .innerText.replace("€", "")
+        .replace("HT/heure/node", "")
+        .trim(),
     }))
   );
+
+  ovhPostgres.push({
+    type: "postgres",
+    currency: "€",
+    size: "GB",
+  });
+  ovhMysql.push({
+    type: "mysql",
+    currency: "€",
+    size: "GB",
+  });
+  ovhMongo.push({
+    type: "mongoDB",
+    currency: "€",
+    size: "GB",
+  });
+
+  // console.log(ovhPostgres, ovhMysql, ovhMongo);
 
   const data = {
     database: {

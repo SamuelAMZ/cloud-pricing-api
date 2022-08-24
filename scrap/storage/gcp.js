@@ -7,36 +7,48 @@ const gcpS = async () => {
   // standard storage
   const standard = [
     {
-      storage: 100,
-      price: (100 * constantS).toFixed(3),
+      storage: "100",
+      pricePerMo: (100 * constantS).toFixed(2),
     },
     {
-      storage: 500,
-      price: (500 * constantS).toFixed(3),
+      storage: "500",
+      pricePerMo: (500 * constantS).toFixed(2),
     },
     {
-      storage: 1000,
-      price: (1000 * constantS).toFixed(3),
+      storage: "1000",
+      pricePerMo: (1000 * constantS).toFixed(2),
     },
   ];
 
   // standard storage
   const nearline = [
     {
-      storage: 100,
-      price: (100 * constantN).toFixed(3),
+      storage: "100",
+      pricePerMo: (100 * constantN).toFixed(2),
     },
     {
-      storage: 500,
-      price: (500 * constantN).toFixed(3),
+      storage: "500",
+      pricePerMo: (500 * constantN).toFixed(2),
     },
     {
-      storage: 1000,
-      price: (1000 * constantN).toFixed(3),
+      storage: "1000",
+      pricePerMo: (1000 * constantN).toFixed(2),
     },
   ];
 
-  // console.log(standard, nearline);
+  standard.push({
+    type: "standard",
+    currency: "$",
+    size: "GB",
+  });
+  nearline.push({
+    type: "nearline",
+    currency: "$",
+    size: "GB",
+  });
+
+  console.log(standard, nearline);
+
   const data = {
     storage: {
       standard: standard,

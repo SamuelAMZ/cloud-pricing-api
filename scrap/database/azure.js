@@ -10,14 +10,21 @@ const azureD = async (page20) => {
         )
       )[0].children
     ).map((item) => ({
-      type:
+      title:
         "Azure " +
         item
           .querySelector("tr > td:nth-child(2)")
           .innerText.replace("GiB", "")
           .trim(),
-      size: "Azure " + item.querySelector("tr > td:nth-child(2)").innerText,
-      price: "Azure " + item.querySelector("tr > td:nth-child(3)").innerText,
+      size: item
+        .querySelector("tr > td:nth-child(2)")
+        .innerText.replace("GiB", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr > td:nth-child(3)")
+        .innerText.replace("/hour", "")
+        .replace("$", "")
+        .trim(),
     }))
   );
   // mysql azure
@@ -31,14 +38,21 @@ const azureD = async (page20) => {
         )
       )[0].children
     ).map((item) => ({
-      type:
+      title:
         "Azure " +
         item
           .querySelector("tr > td:nth-child(2)")
           .innerText.replace("GiB", "")
           .trim(),
-      size: "Azure " + item.querySelector("tr > td:nth-child(2)").innerText,
-      price: "Azure " + item.querySelector("tr > td:nth-child(3)").innerText,
+      size: item
+        .querySelector("tr > td:nth-child(2)")
+        .innerText.replace("GiB", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr > td:nth-child(3)")
+        .innerText.replace("/hour", "")
+        .replace("$", "")
+        .trim(),
     }))
   );
 
@@ -64,13 +78,36 @@ const azureD = async (page20) => {
         )
       )[0].children
     ).map((item) => ({
-      type: item.querySelector("tr td:nth-child(1)").innerText,
-      size: item.querySelector("tr td:nth-child(3)").innerText,
-      price: item.querySelector("tr td:nth-child(5)").innerText,
+      title: item.querySelector("tr td:nth-child(1)").innerText,
+      size: item
+        .querySelector("tr td:nth-child(3)")
+        .innerText.replace("GB", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr td:nth-child(5)")
+        .innerText.replace("$", "")
+        .replace("/hr", "")
+        .trim(),
     }))
   );
 
-  // console.log(postgres, mysql, mongo);
+  postgres.push({
+    type: "postgres",
+    currency: "$",
+    size: "GB",
+  });
+  mysql.push({
+    type: "mysql",
+    currency: "$",
+    size: "GB",
+  });
+  mongo.push({
+    type: "mongoDB",
+    currency: "$",
+    size: "GB",
+  });
+
+  console.log(postgres, mysql, mongo);
 
   const data = {
     database: {

@@ -7,78 +7,78 @@ const gcpD = async (page17) => {
   // postgres database
   const postgres = [
     {
-      type: "Postgres 1GB",
+      title: "Postgres 1GB",
       size: "1",
-      price: (1 * constantR).toFixed(5),
+      pricePerHour: (1 * constantR).toFixed(5),
     },
     {
-      type: "Postgres 2GB",
+      title: "Postgres 2GB",
       size: "2",
-      price: (2 * constantR).toFixed(5),
+      pricePerHour: (2 * constantR).toFixed(5),
     },
     {
-      type: "Postgres 4GB",
+      title: "Postgres 4GB",
       size: "4",
-      price: (4 * constantR).toFixed(5),
+      pricePerHour: (4 * constantR).toFixed(5),
     },
     {
-      type: "Postgres 8GB",
+      title: "Postgres 8GB",
       size: "8",
-      price: (8 * constantR).toFixed(5),
+      pricePerHour: (8 * constantR).toFixed(5),
     },
     {
-      type: "Postgres 16GB",
+      title: "Postgres 16GB",
       size: "16",
-      price: (16 * constantR).toFixed(5),
+      pricePerHour: (16 * constantR).toFixed(5),
     },
     {
-      type: "Postgres 32GB",
+      title: "Postgres 32GB",
       size: "32",
-      price: (32 * constantR).toFixed(5),
+      pricePerHour: (32 * constantR).toFixed(5),
     },
     {
-      type: "Postgres 64GB",
+      title: "Postgres 64GB",
       size: "64",
-      price: (64 * constantR).toFixed(5),
+      pricePerHour: (64 * constantR).toFixed(5),
     },
   ];
 
   // MySql database
   const mysql = [
     {
-      type: "MySql 1GB",
+      title: "MySql 1GB",
       size: "1",
-      price: (1 * constantR).toFixed(5),
+      pricePerHour: (1 * constantR).toFixed(5),
     },
     {
-      type: "MySql 2GB",
+      title: "MySql 2GB",
       size: "2",
-      price: (2 * constantR).toFixed(5),
+      pricePerHour: (2 * constantR).toFixed(5),
     },
     {
-      type: "MySql 4GB",
+      title: "MySql 4GB",
       size: "4",
-      price: (4 * constantR).toFixed(5),
+      pricePerHour: (4 * constantR).toFixed(5),
     },
     {
-      type: "MySql 8GB",
+      title: "MySql 8GB",
       size: "8",
-      price: (8 * constantR).toFixed(5),
+      pricePerHour: (8 * constantR).toFixed(5),
     },
     {
-      type: "MySql 16GB",
+      title: "MySql 16GB",
       size: "16",
-      price: (16 * constantR).toFixed(5),
+      pricePerHour: (16 * constantR).toFixed(5),
     },
     {
-      type: "MySql 32GB",
+      title: "MySql 32GB",
       size: "32",
-      price: (32 * constantR).toFixed(5),
+      pricePerHour: (32 * constantR).toFixed(5),
     },
     {
-      type: "MySql 64GB",
+      title: "MySql 64GB",
       size: "64",
-      price: (64 * constantR).toFixed(5),
+      pricePerHour: (64 * constantR).toFixed(5),
     },
   ];
 
@@ -104,11 +104,36 @@ const gcpD = async (page17) => {
         )
       )[0].children
     ).map((item) => ({
-      type: item.querySelector("tr td:nth-child(1)").innerText,
-      size: item.querySelector("tr td:nth-child(3)").innerText,
-      price: item.querySelector("tr td:nth-child(5)").innerText,
+      title: item.querySelector("tr td:nth-child(1)").innerText,
+      size: item
+        .querySelector("tr td:nth-child(3)")
+        .innerText.replace("GB", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector("tr td:nth-child(5)")
+        .innerText.replace("$", "")
+        .replace("/hr", "")
+        .trim(),
     }))
   );
+
+  postgres.push({
+    type: "postgres",
+    currency: "$",
+    size: "GB",
+  });
+  mysql.push({
+    type: "mysql",
+    currency: "$",
+    size: "GB",
+  });
+  mongo.push({
+    type: "mongoDB",
+    currency: "$",
+    size: "GB",
+  });
+
+  // console.log(postgres, mysql, mongo);
 
   const data = {
     database: {

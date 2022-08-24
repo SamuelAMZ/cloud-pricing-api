@@ -10,8 +10,18 @@ const ovhS = async (page9) => {
         )
       )[0].children
     ).map((item) => ({
-      storage: item.querySelector("tr > td:nth-child(2)").innerText,
-      price: item.querySelector("tr > td.price").innerText,
+      storage: item
+        .querySelector("tr > td:nth-child(2)")
+        .innerText.replace("garantis", "")
+        .replace("jusqu'à", "to")
+        .replace("Jusqu'à", "upto")
+        .replace("par", "per")
+        .trim(),
+      pricePerMo: item
+        .querySelector("tr > td.price")
+        .innerText.replace("HT/mois/Go", "")
+        .replace("€", "")
+        .trim(),
     }))
   );
 
@@ -24,10 +34,32 @@ const ovhS = async (page9) => {
         )
       )[0].children
     ).map((item) => ({
-      storage: item.querySelector("tr > td:nth-child(1)").innerText,
-      price: item.querySelector("tr > td:nth-child(2)").innerText,
+      storage: item
+        .querySelector("tr > td:nth-child(1)")
+        .innerText.replace("garantis", "")
+        .replace("Stokage", "Replica")
+        .replace("réplica", "Storage")
+        .replace("Trafic", "traffic")
+        .replace("entrant", "incoming")
+        .replace("sortant", "outgoing")
+        .trim(),
+      pricePerMo: item
+        .querySelector("tr > td:nth-child(2)")
+        .innerText.replace("HT/mois/Go", "")
+        .replace("€", "")
+        .replace("Inclus", "included")
+        .trim(),
     }))
   );
+
+  ovhBS.push({
+    type: "block storage",
+    currency: "€/GB",
+  });
+  ovhOS.push({
+    type: "object storage",
+    currency: "€/GB",
+  });
 
   // console.log(ovhBS, ovhOS);
 
