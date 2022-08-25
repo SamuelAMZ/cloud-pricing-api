@@ -47,7 +47,7 @@ const awsS = async () => {
     size: "GB",
   });
 
-  console.log(S3Standard, S3OneZone);
+  // console.log(S3Standard, S3OneZone);
 
   const data = {
     storage: {

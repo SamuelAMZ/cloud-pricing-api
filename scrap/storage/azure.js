@@ -82,7 +82,7 @@ const azureS = async (page12) => {
     size: "GB",
   });
 
-  console.log(AzureP, AzureS);
+  // console.log(AzureP, AzureS);
 
   const data = {
     storage: {

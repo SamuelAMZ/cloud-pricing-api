@@ -107,7 +107,7 @@ const azureD = async (page20) => {
     size: "GB",
   });
 
-  console.log(postgres, mysql, mongo);
+  // console.log(postgres, mysql, mongo);
 
   const data = {
     database: {

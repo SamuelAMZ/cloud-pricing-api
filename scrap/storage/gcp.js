@@ -47,7 +47,7 @@ const gcpS = async () => {
     size: "GB",
   });
 
-  console.log(standard, nearline);
+  // console.log(standard, nearline);
 
   const data = {
     storage: {

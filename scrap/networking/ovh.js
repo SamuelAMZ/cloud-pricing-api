@@ -21,7 +21,7 @@ const ovhN = async (page26) => {
     currency: "€",
   });
 
-  console.log(ovh);
+  // console.log(ovh);
 
   const data = {
     networking: {

@@ -20,7 +20,7 @@ const linodeN = async (page23) => {
     currency: "$",
   });
 
-  console.log(linode);
+  // console.log(linode);
 
   const data = {
     networking: {

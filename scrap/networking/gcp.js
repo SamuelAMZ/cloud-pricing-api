@@ -16,7 +16,7 @@ const gcpN = async () => {
     currency: "$",
   });
 
-  console.log(gcp);
+  // console.log(gcp);
 
   const data = {
     networking: {

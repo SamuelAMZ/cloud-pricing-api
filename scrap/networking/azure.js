@@ -15,7 +15,7 @@ const azureN = async () => {
     currency: "$",
   });
 
-  console.log(azure);
+  // console.log(azure);
 
   const data = {
     networking: {

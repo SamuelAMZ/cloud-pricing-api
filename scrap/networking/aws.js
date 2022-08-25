@@ -13,7 +13,7 @@ const awsN = async () => {
     currency: "$",
   });
 
-  console.log(aws);
+  // console.log(aws);
 
   const data = {
     networking: {

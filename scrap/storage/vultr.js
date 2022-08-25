@@ -70,7 +70,7 @@ const vultrS = async (page11) => {
     size: "GB",
   });
 
-  console.log(vultrBS, vultrOS);
+  // console.log(vultrBS, vultrOS);
 
   const data = {
     storage: {
