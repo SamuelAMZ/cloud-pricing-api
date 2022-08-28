@@ -1,59 +1,25 @@
 const { awsArr } = require("../data.js");
 
-const aws = async (page6) => {
-  const computeData = [];
+// Array.from(document.querySelectorAll("td.storage > span")).forEach((item) => {console.log(item.getAttribute('sort') )})
 
-  const test = async () => {
-    await page6.select(
-      "#productList > div.field > div > div > div > span > select",
-      "100"
-    );
+const awsC = async (page6) => {
+  //  scrap aws
+  const computeData = await page6.evaluate(() =>
+    Array.from(
+      Array.from(document.querySelectorAll("#data > tbody"))[0].children
+    ).map((item) => ({
+      title: item.querySelector("td.apiname").innerText,
+      pricePerMo: item
+        .querySelector("td.cost-ondemand.cost-ondemand-linux")
+        .innerText.replace("$", "")
+        .replace("monthly", "")
+        .trim(),
+      ram: item.querySelector("td.memory").innerText.replace("GiB", "").trim(),
+      cpu: item.querySelector("td.vcpus").innerText.replace("vCPUs", "").trim(),
 
-    await page6.waitForTimeout(3000);
-
-    const awsAll = await page6.evaluate(() =>
-      Array.from(
-        Array.from(
-          document.querySelectorAll(
-            "#productList > div.b-table > div > table > tbody"
-          )
-        )[0].children
-      ).map((item) => ({
-        title: item.querySelector("td:nth-child(2)").innerText,
-        pricePerHour: item
-          .querySelector("td:nth-child(8)")
-          .innerText.replace("$US", "")
-          .trim(),
-        ram: item
-          .querySelector("td:nth-child(4)")
-          .innerText.replace("GB", "")
-          .trim(),
-        cpu: item.querySelector("td:nth-child(3)").innerText,
-        storage: "depend - optional",
-      }))
-    );
-
-    computeData.push(awsAll);
-  };
-
-  const heading1 = await page6.$eval(
-    ".pagination-list li:last-child",
-    (el) => el.textContent
+      storage: item.querySelector("td.storage > span").getAttribute("sort"),
+    }))
   );
-
-  for (
-    let i = 0;
-    i < Math.floor(Number(heading1) - Number(heading1) / 2 - 1);
-    i++
-  ) {
-    await test();
-
-    console.log(Math.floor(Number(heading1) - Number(heading1) / 2 - 1));
-    // console.log(computeData);
-
-    await page6.click("#productList > nav > a.pagination-link.pagination-next");
-    await page6.waitForTimeout(4000);
-  }
 
   computeData.push({
     type: "virtual machines",
@@ -68,7 +34,9 @@ const aws = async (page6) => {
     compute: { computeData },
   };
 
+  // console.log(data);
+
   awsArr(data);
 };
 
-exports.aws = aws;
+exports.aws = awsC;

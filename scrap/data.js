@@ -36,6 +36,12 @@ function bluePrint(providerData, data, name) {
   if (providerData.length === 4 && name === "GCP") {
     addingData(providerData, name);
   }
+  if (providerData.length === 4 && name === "AWS") {
+    addingData(providerData, name);
+  }
+  if (providerData.length === 4 && name === "azure") {
+    addingData(providerData, name);
+  }
 }
 
 function linodeArr(data) {
