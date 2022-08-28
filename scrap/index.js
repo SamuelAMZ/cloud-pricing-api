@@ -197,63 +197,34 @@ puppeteer.use(StealthPlugin());
   //   console.log(`digital networking error ${error.message}`);
   // }
 
-  // // -------- GCP SCRAPPING ----------
-  // // GCP COMPUTE SCRAPPING
-  // const page8 = await browser.newPage();
-  // await page8.setViewport({
-  //   width: 1440,
-  //   height: 980,
-  //   deviceScaleFactor: 1,
-  // });
-  // try {
-  //   await page8.goto(process.env.LINK_HOLORI_GOOGLE, {
-  //     waitUntil: "networkidle2",
-  //   });
-  //   await computeGcp.gcp(page8);
-  // } catch (error) {
-  //   console.log(`gcp compute error ${error.message}`);
-  // }
-  // // GCP STORAGE SCRAPPING
-  // await storageGcp.gcpS();
-  // // GCP DATABASE SCRAPPING
-  // const page9 = await browser.newPage();
-  // try {
-  //   await page9.goto(process.env.LINK_MONGO);
-  //   await databaseGcp.gcpD(page9);
-  // } catch (error) {
-  //   console.log(`gcp database error ${error.message}`);
-  // }
-  // // GCP NETWORKING SCRAPPING
-  // await networkingGcp.gcpN();
-
-  // // -------- AWS SCRAPPING ----------
-  // // AWS COMPUTE SCRAPPING
-  // const page10 = await browser.newPage();
-  // await page10.setViewport({
-  //   width: 1440,
-  //   height: 980,
-  //   deviceScaleFactor: 1,
-  // });
-  // try {
-  //   await page10.goto(process.env.LINK_HOLORI_AWS, {
-  //     waitUntil: "networkidle2",
-  //   });
-  //   await computeAws.aws(page10);
-  // } catch (error) {
-  //   console.log(`aws compute error ${error.message}`);
-  // }
-  // // AWS STORAGE SCRAPPING
-  // await storageAws.awsS();
-  // // AWS DATABASE SCRAPPING
-  // const page11 = await browser.newPage();
-  // try {
-  //   await page11.goto(process.env.LINK_VANTAGE);
-  //   await databaseAws.awsD(page11);
-  // } catch (error) {
-  //   console.log(`aws database error ${error.message}`);
-  // }
-  // // AWS NETWORKING SCRAPPING
-  // await networkingAws.awsN();
+  // -------- AWS SCRAPPING ----------
+  // AWS COMPUTE SCRAPPING
+  const page10 = await browser.newPage();
+  await page10.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page10.goto(process.env.LINK_HOLORI_AWS, {
+      waitUntil: "networkidle2",
+    });
+    await computeAws.aws(page10);
+  } catch (error) {
+    console.log(`aws compute error ${error.message}`);
+  }
+  // AWS STORAGE SCRAPPING
+  await storageAws.awsS();
+  // AWS DATABASE SCRAPPING
+  const page11 = await browser.newPage();
+  try {
+    await page11.goto(process.env.LINK_VANTAGE);
+    await databaseAws.awsD(page11);
+  } catch (error) {
+    console.log(`aws database error ${error.message}`);
+  }
+  // AWS NETWORKING SCRAPPING
+  await networkingAws.awsN();
 
   // -------- AZURE SCRAPPING ----------
   // AZURE COMPUTE SCRAPPING
@@ -297,6 +268,36 @@ puppeteer.use(StealthPlugin());
 
   // AZURE NETWORKING SCRAPPING
   await networkingAzure.azureN();
+  await page20.close();
+
+  // -------- GCP SCRAPPING ----------
+  // GCP COMPUTE SCRAPPING
+  const page8 = await browser.newPage();
+  await page8.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page8.goto(process.env.LINK_HOLORI_GOOGLE, {
+      waitUntil: "networkidle2",
+    });
+    await computeGcp.gcp(page8);
+  } catch (error) {
+    console.log(`gcp compute error ${error.message}`);
+  }
+  // GCP STORAGE SCRAPPING
+  await storageGcp.gcpS();
+  // GCP DATABASE SCRAPPING
+  const page9 = await browser.newPage();
+  try {
+    await page9.goto(process.env.LINK_MONGO);
+    await databaseGcp.gcpD(page9);
+  } catch (error) {
+    console.log(`gcp database error ${error.message}`);
+  }
+  // GCP NETWORKING SCRAPPING
+  await networkingGcp.gcpN();
 
   // close browser
   await browser.close();

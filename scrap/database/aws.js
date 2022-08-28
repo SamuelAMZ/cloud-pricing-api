@@ -16,6 +16,8 @@ const awsD = async (page18) => {
     }))
   );
 
+  console.log(postgres);
+
   //  scrap mysql
   const mysql = await page18.evaluate(() =>
     Array.from(
@@ -31,7 +33,14 @@ const awsD = async (page18) => {
     }))
   );
 
+  console.log(mysql);
+
   // scrap mongo
+  await page18.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
   await page18.goto(process.env.LINK_MONGO);
   // click on the dedicate pricing plan "view pricing"
   await page18.click(
@@ -66,6 +75,8 @@ const awsD = async (page18) => {
         .trim(),
     }))
   );
+
+  console.log(mongo);
 
   postgres.push({
     type: "postgres",
