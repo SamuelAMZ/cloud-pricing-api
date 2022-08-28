@@ -44,158 +44,158 @@ puppeteer.use(StealthPlugin());
     headless: false,
   });
 
-  // // -------- LINODE SCRAPPING ----------
-  // // LINODE COMPUTE SCRAPPING
-  // const page1 = await browser.newPage();
-  // await page1.setViewport({
-  //   width: 1440,
-  //   height: 980,
-  //   deviceScaleFactor: 1,
-  // });
-  // try {
-  //   await page1.goto(process.env.LINK_LINODE, {
-  //     waitUntil: "networkidle2",
-  //   });
-  //   await computeLinode.linode(page1);
-  // } catch (error) {
-  //   console.log(`linode compute error ${error.message}`);
-  // }
-  // // LINODE STORAGE SCRAPPING
-  // try {
-  //   await storageLinode.linodeS(page1);
-  // } catch (error) {
-  //   console.log(`linode storage error ${error.message}`);
-  // }
-  // // LINODE DATABASE SCRAPPING
-  // try {
-  //   await databaseLinode.linodeD(page1);
-  // } catch (error) {
-  //   console.log(`linode database error ${error.message}`);
-  // }
-  // // LINODE NETWORKING SCRAPPING
-  // try {
-  //   await networkingLinode.linodeN(page1);
-  // } catch (error) {
-  //   console.log(`linode networking error ${error.message}`);
-  // }
+  // -------- LINODE SCRAPPING ----------
+  // LINODE COMPUTE SCRAPPING
+  const page1 = await browser.newPage();
+  await page1.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page1.goto(process.env.LINK_LINODE, {
+      waitUntil: "networkidle2",
+    });
+    await computeLinode.linode(page1);
+  } catch (error) {
+    console.log(`linode compute error ${error.message}`);
+  }
+  // LINODE STORAGE SCRAPPING
+  try {
+    await storageLinode.linodeS(page1);
+  } catch (error) {
+    console.log(`linode storage error ${error.message}`);
+  }
+  // LINODE DATABASE SCRAPPING
+  try {
+    await databaseLinode.linodeD(page1);
+  } catch (error) {
+    console.log(`linode database error ${error.message}`);
+  }
+  // LINODE NETWORKING SCRAPPING
+  try {
+    await networkingLinode.linodeN(page1);
+  } catch (error) {
+    console.log(`linode networking error ${error.message}`);
+  }
 
-  // // -------- OVH SCRAPPING ----------
-  // // OVH COMPUTE SCRAPPING
-  // const page2 = await browser.newPage();
-  // await page2.setViewport({
-  //   width: 1440,
-  //   height: 980,
-  //   deviceScaleFactor: 1,
-  // });
-  // try {
-  //   await page2.goto(process.env.LINK_OVH, {
-  //     waitUntil: "networkidle2",
-  //   });
-  //   await computeOvh.ovh(page2);
-  // } catch (error) {
-  //   console.log(`ovh compute error ${error.message}`);
-  // }
-  // // OVH STORAGE SCRAPPING
-  // try {
-  //   await storageOvh.ovhS(page2);
-  // } catch (error) {
-  //   console.log(`ovh storage error ${error.message}`);
-  // }
-  // // OVH DATABASE SCRAPPING
-  // try {
-  //   await databaseOvh.ovhD(page2);
-  // } catch (error) {
-  //   console.log(`ovh database error ${error.message}`);
-  // }
-  // // OVH NETWORKING SCRAPPING
-  // try {
-  //   await networkingOvh.ovhN(page2);
-  // } catch (error) {
-  //   console.log(`ovh networking error ${error.message}`);
-  // }
+  // -------- OVH SCRAPPING ----------
+  // OVH COMPUTE SCRAPPING
+  const page2 = await browser.newPage();
+  await page2.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page2.goto(process.env.LINK_OVH, {
+      waitUntil: "networkidle2",
+    });
+    await computeOvh.ovh(page2);
+  } catch (error) {
+    console.log(`ovh compute error ${error.message}`);
+  }
+  // OVH STORAGE SCRAPPING
+  try {
+    await storageOvh.ovhS(page2);
+  } catch (error) {
+    console.log(`ovh storage error ${error.message}`);
+  }
+  // OVH DATABASE SCRAPPING
+  try {
+    await databaseOvh.ovhD(page2);
+  } catch (error) {
+    console.log(`ovh database error ${error.message}`);
+  }
+  // OVH NETWORKING SCRAPPING
+  try {
+    await networkingOvh.ovhN(page2);
+  } catch (error) {
+    console.log(`ovh networking error ${error.message}`);
+  }
 
-  // // -------- VULTR SCRAPPING ----------
-  // // VULTR COMPUTE SCRAPPING
-  // const page3 = await browser.newPage();
-  // await page3.setViewport({
-  //   width: 1440,
-  //   height: 980,
-  //   deviceScaleFactor: 1,
-  // });
-  // try {
-  //   await page3.goto(process.env.LINK_VULTR, {
-  //     waitUntil: "networkidle2",
-  //   });
-  //   await computeVultr.vultr(page3);
-  // } catch (error) {
-  //   console.log(`vultr compute error ${error.message}`);
-  // }
-  // // VULTR STORAGE SCRAPPING
-  // try {
-  //   await storageVultr.vultrS(page3);
-  // } catch (error) {
-  //   console.log(`vultr storage error ${error.message}`);
-  // }
-  // // VULTR DATABASE SCRAPPING
-  // try {
-  //   await databaseVultr.vultrD(page3);
-  // } catch (error) {
-  //   console.log(`vultr database error ${error.message}`);
-  // }
-  // // VULTR NETWORKING SCRAPPING
-  // try {
-  //   await networkingVultr.vultrN(page3);
-  // } catch (error) {
-  //   console.log(`vultr networking error ${error.message}`);
-  // }
+  // -------- VULTR SCRAPPING ----------
+  // VULTR COMPUTE SCRAPPING
+  const page3 = await browser.newPage();
+  await page3.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page3.goto(process.env.LINK_VULTR, {
+      waitUntil: "networkidle2",
+    });
+    await computeVultr.vultr(page3);
+  } catch (error) {
+    console.log(`vultr compute error ${error.message}`);
+  }
+  // VULTR STORAGE SCRAPPING
+  try {
+    await storageVultr.vultrS(page3);
+  } catch (error) {
+    console.log(`vultr storage error ${error.message}`);
+  }
+  // VULTR DATABASE SCRAPPING
+  try {
+    await databaseVultr.vultrD(page3);
+  } catch (error) {
+    console.log(`vultr database error ${error.message}`);
+  }
+  // VULTR NETWORKING SCRAPPING
+  try {
+    await networkingVultr.vultrN(page3);
+  } catch (error) {
+    console.log(`vultr networking error ${error.message}`);
+  }
 
-  // // -------- DIGITAL SCRAPPING ----------
-  // // // DIGITAL COMPUTE SCRAPPING
-  // const page4 = await browser.newPage();
-  // await page4.setViewport({
-  //   width: 1440,
-  //   height: 980,
-  //   deviceScaleFactor: 1,
-  // });
-  // try {
-  //   await page4.goto(process.env.LINK_DIGITAL_COMPUTE);
-  //   await computeDigital.digital(page4);
-  // } catch (error) {
-  //   console.log(`digital compute error ${error.message}`);
-  // }
-  // // DIGITAL STORAGE SCRAPPING
-  // const page5 = await browser.newPage();
-  // await page5.setViewport({
-  //   width: 1440,
-  //   height: 980,
-  //   deviceScaleFactor: 1,
-  // });
-  // try {
-  //   await page5.goto(process.env.LINK_DIGITAL_STORAGE, {
-  //     waitUntil: "networkidle2",
-  //   });
-  //   await storageDigital.digitalS(page5);
-  // } catch (error) {
-  //   console.log(`digital storage error ${error.message}`);
-  // }
-  // // DIGITAL OCEAN DATABASE SCRAPPING
-  // const page6 = await browser.newPage();
-  // try {
-  //   await page6.goto(process.env.LINK_DIGITAL_DATABASE, {
-  //     waitUntil: "networkidle2",
-  //   });
-  //   await databaseDigital.digitalD(page6);
-  // } catch (error) {
-  //   console.log(`digital database error ${error.message}`);
-  // }
-  // // DIGITAL NETWORKING SCRAPPING
-  // const page7 = await browser.newPage();
-  // try {
-  //   await page7.goto(process.env.LINK_DIGITAL_NETWORKING);
-  //   await networkingDigital.digitalN(page7);
-  // } catch (error) {
-  //   console.log(`digital networking error ${error.message}`);
-  // }
+  // -------- DIGITAL SCRAPPING ----------
+  // // DIGITAL COMPUTE SCRAPPING
+  const page4 = await browser.newPage();
+  await page4.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page4.goto(process.env.LINK_DIGITAL_COMPUTE);
+    await computeDigital.digital(page4);
+  } catch (error) {
+    console.log(`digital compute error ${error.message}`);
+  }
+  // DIGITAL STORAGE SCRAPPING
+  const page5 = await browser.newPage();
+  await page5.setViewport({
+    width: 1440,
+    height: 980,
+    deviceScaleFactor: 1,
+  });
+  try {
+    await page5.goto(process.env.LINK_DIGITAL_STORAGE, {
+      waitUntil: "networkidle2",
+    });
+    await storageDigital.digitalS(page5);
+  } catch (error) {
+    console.log(`digital storage error ${error.message}`);
+  }
+  // DIGITAL OCEAN DATABASE SCRAPPING
+  const page6 = await browser.newPage();
+  try {
+    await page6.goto(process.env.LINK_DIGITAL_DATABASE, {
+      waitUntil: "networkidle2",
+    });
+    await databaseDigital.digitalD(page6);
+  } catch (error) {
+    console.log(`digital database error ${error.message}`);
+  }
+  // DIGITAL NETWORKING SCRAPPING
+  const page7 = await browser.newPage();
+  try {
+    await page7.goto(process.env.LINK_DIGITAL_NETWORKING);
+    await networkingDigital.digitalN(page7);
+  } catch (error) {
+    console.log(`digital networking error ${error.message}`);
+  }
 
   // -------- AWS SCRAPPING ----------
   // AWS COMPUTE SCRAPPING
