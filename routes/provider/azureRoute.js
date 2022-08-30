@@ -1,9 +1,10 @@
 const express = require("express");
-const vultrRoute = express.Router();
-const { connectToDb, getDb } = require("../db.js");
+const azureRoute = express.Router();
+const { connectToDb, getDb } = require("../../db.js");
 
 // connect to db
 let db;
+
 connectToDb((err) => {
   if (!err) {
     console.log("connect to db");
@@ -11,8 +12,8 @@ connectToDb((err) => {
   }
 });
 
-vultrRoute.get("/", async (req, res) => {
-  const val = await db.collection("vultr").findOne(
+azureRoute.get("/", async (req, res) => {
+  const val = await db.collection("azure").findOne(
     {},
     {
       sort: { _id: -1 },
@@ -22,4 +23,4 @@ vultrRoute.get("/", async (req, res) => {
   res.json(val);
 });
 
-module.exports = vultrRoute;
+module.exports = azureRoute;

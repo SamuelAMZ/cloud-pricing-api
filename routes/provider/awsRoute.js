@@ -1,6 +1,6 @@
 const express = require("express");
-const ovhRoute = express.Router();
-const { connectToDb, getDb } = require("../db.js");
+const awsRoute = express.Router();
+const { connectToDb, getDb } = require("../../db.js");
 
 // connect to db
 let db;
@@ -11,8 +11,8 @@ connectToDb((err) => {
   }
 });
 
-ovhRoute.get("/", async (req, res) => {
-  const val = await db.collection("ovhCloud").findOne(
+awsRoute.get("/", async (req, res) => {
+  const val = await db.collection("AWS").findOne(
     {},
     {
       sort: { _id: -1 },
@@ -22,4 +22,4 @@ ovhRoute.get("/", async (req, res) => {
   res.json(val);
 });
 
-module.exports = ovhRoute;
+module.exports = awsRoute;

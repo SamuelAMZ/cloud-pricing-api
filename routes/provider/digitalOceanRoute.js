@@ -1,6 +1,6 @@
 const express = require("express");
 const digitalOceanRoute = express.Router();
-const { connectToDb, getDb } = require("../db.js");
+const { connectToDb, getDb } = require("../../db.js");
 
 // connect to db
 let db;

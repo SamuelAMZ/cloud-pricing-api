@@ -41,7 +41,7 @@ puppeteer.use(StealthPlugin());
 
 (async () => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
   });
 
   // -------- LINODE SCRAPPING ----------

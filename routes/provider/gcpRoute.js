@@ -1,6 +1,6 @@
 const express = require("express");
-const linodeRoute = express.Router();
-const { connectToDb, getDb } = require("../db.js");
+const gcpRoute = express.Router();
+const { connectToDb, getDb } = require("../../db.js");
 
 // connect to db
 let db;
@@ -11,8 +11,8 @@ connectToDb((err) => {
   }
 });
 
-linodeRoute.get("/", async (req, res) => {
-  const val = await db.collection("linode").findOne(
+gcpRoute.get("/", async (req, res) => {
+  const val = await db.collection("GCP").findOne(
     {},
     {
       sort: { _id: -1 },
@@ -22,4 +22,4 @@ linodeRoute.get("/", async (req, res) => {
   res.json(val);
 });
 
-module.exports = linodeRoute;
+module.exports = gcpRoute;

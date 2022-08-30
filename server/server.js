@@ -2,14 +2,19 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
-// routes
-const linodeRoute = require("../routes/linodeRoute.js");
-const ovhRoute = require("../routes/ovhRoute.js");
-const vultrRoute = require("../routes/vultrRoute.js");
-const digitalOceanRoute = require("../routes/digitalOceanRoute.js");
-const gcpRoute = require("../routes/gcpRoute.js");
-const awsRoute = require("../routes/awsRoute.js");
-const azureRoute = require("../routes/azureRoute.js");
+// routes providers
+const linodeRoute = require("../routes/provider/linodeRoute.js");
+const ovhRoute = require("../routes/provider/ovhRoute.js");
+const vultrRoute = require("../routes/provider/vultrRoute.js");
+const digitalOceanRoute = require("../routes/provider/digitalOceanRoute.js");
+const gcpRoute = require("../routes/provider/gcpRoute.js");
+const awsRoute = require("../routes/provider/awsRoute.js");
+const azureRoute = require("../routes/provider/azureRoute.js");
+// routes products
+const computeRoute = require("../routes/product/computeRoute.js");
+const databaseRoute = require("../routes/product/databaseRoute.js");
+const storageRoute = require("../routes/product/storageRoute.js");
+const networkingRoute = require("../routes/product/networkingRoute.js");
 
 app.get("/", (req, res) => {
   res.status(200).send("Server up");
@@ -63,6 +68,34 @@ app.use("/api/v1/aws", awsRoute);
     @endpoint: /api/v1/azure
 */
 app.use("/api/v1/azure", azureRoute);
+
+/*   
+    @desc: get compute data {compute}
+    @method: GET
+    @endpoint: /api/v1/compute
+*/
+app.use("/api/v1/compute", computeRoute);
+
+/*   
+    @desc: get database data {database}
+    @method: GET
+    @endpoint: /api/v1/database
+*/
+app.use("/api/v1/database", databaseRoute);
+
+/*   
+    @desc: get storage data {storage}
+    @method: GET
+    @endpoint: /api/v1/storage
+*/
+app.use("/api/v1/storage", storageRoute);
+
+/*   
+    @desc: get networking data {networking}
+    @method: GET
+    @endpoint: /api/v1/networking
+*/
+app.use("/api/v1/networking", networkingRoute);
 
 app.listen(process.env.PORT, () =>
   console.log(`app listen on port ${process.env.PORT}`)

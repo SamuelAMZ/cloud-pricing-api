@@ -1,10 +1,9 @@
 const express = require("express");
-const azureRoute = express.Router();
-const { connectToDb, getDb } = require("../db.js");
+const ovhRoute = express.Router();
+const { connectToDb, getDb } = require("../../db.js");
 
 // connect to db
 let db;
-
 connectToDb((err) => {
   if (!err) {
     console.log("connect to db");
@@ -12,8 +11,8 @@ connectToDb((err) => {
   }
 });
 
-azureRoute.get("/", async (req, res) => {
-  const val = await db.collection("azure").findOne(
+ovhRoute.get("/", async (req, res) => {
+  const val = await db.collection("ovhCloud").findOne(
     {},
     {
       sort: { _id: -1 },
@@ -23,4 +22,4 @@ azureRoute.get("/", async (req, res) => {
   res.json(val);
 });
 
-module.exports = azureRoute;
+module.exports = ovhRoute;
