@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
+const mongoose = require("mongoose");
 
 // routes providers
 const linodeRoute = require("../routes/provider/linodeRoute.js");
@@ -15,6 +16,14 @@ const computeRoute = require("../routes/product/computeRoute.js");
 const databaseRoute = require("../routes/product/databaseRoute.js");
 const storageRoute = require("../routes/product/storageRoute.js");
 const networkingRoute = require("../routes/product/networkingRoute.js");
+// User routes
+const userRegisterRoute = require("../auth/userRoutes/register.js");
+
+// body parsing
+app.use(express.json());
+
+// connect mongoose
+mongoose.connect(process.env.DB_URI_USR);
 
 app.get("/", (req, res) => {
   res.status(200).send("Server up");
@@ -96,6 +105,13 @@ app.use("/api/v1/storage", storageRoute);
     @endpoint: /api/v1/networking
 */
 app.use("/api/v1/networking", networkingRoute);
+
+/*   
+    @desc: register user
+    @method: POST
+    @endpoint: /api/user/register
+*/
+app.use("/api/user/register", userRegisterRoute);
 
 app.listen(process.env.PORT, () =>
   console.log(`app listen on port ${process.env.PORT}`)
