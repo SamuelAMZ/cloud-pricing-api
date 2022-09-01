@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const registerSchema = new mongoose.Schema({
+const user = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Verify name"],
@@ -24,4 +24,4 @@ const registerSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("User", registerSchema);
+module.exports = mongoose.model("User", user);

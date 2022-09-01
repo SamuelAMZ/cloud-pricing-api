@@ -18,6 +18,7 @@ const storageRoute = require("../routes/product/storageRoute.js");
 const networkingRoute = require("../routes/product/networkingRoute.js");
 // User routes
 const userRegisterRoute = require("../auth/userRoutes/register.js");
+const userLoginRoute = require("../auth/userRoutes/login.js");
 
 // body parsing
 app.use(express.json());
@@ -112,6 +113,13 @@ app.use("/api/v1/networking", networkingRoute);
     @endpoint: /api/user/register
 */
 app.use("/api/user/register", userRegisterRoute);
+
+/*   
+    @desc: login user
+    @method: POST
+    @endpoint: /api/user/login
+*/
+app.use("/api/user/login", userLoginRoute);
 
 app.listen(process.env.PORT, () =>
   console.log(`app listen on port ${process.env.PORT}`)

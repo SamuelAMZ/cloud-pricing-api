@@ -1,6 +1,6 @@
 const express = require("express");
 const userRegisterRoute = express.Router();
-const registerModel = require("../../models/UserRegister");
+const User = require("../../models/UserRegister");
 // validation
 const Joi = require("@hapi/joi");
 // hashing pass
@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 const schema = Joi.object({
   name: Joi.string().min(3).required(),
   email: Joi.string().required().email().lowercase(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().alphanum().min(6).max(1024).required(),
 });
 
 userRegisterRoute.post("/", async (req, res) => {
@@ -26,7 +26,7 @@ userRegisterRoute.post("/", async (req, res) => {
   const hashedPass = await bcrypt.hash(req.body.password, salt);
 
   // getting actual data from body
-  const user = new registerModel({
+  const user = new User({
     name: req.body.name,
     email: req.body.email,
     password: hashedPass,
@@ -35,6 +35,7 @@ userRegisterRoute.post("/", async (req, res) => {
   try {
     await user.save();
     res.status(201).json({
+      message: "account created successfully",
       id: user.id,
       name: user.name,
       email: user.email,
