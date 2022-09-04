@@ -34,7 +34,7 @@ const checkUToken = (req, res, next) => {
 };
 
 // action after checing user token
-const actionAfterCheckinguToken = (req, res, next) => {
+const actionAfterCheckingUToken = (req, res, next) => {
   if (res.locals.user === null || !res.locals.user) {
     console.log("redirected");
     res.redirect("/");
@@ -43,4 +43,4 @@ const actionAfterCheckinguToken = (req, res, next) => {
   }
 };
 
-module.exports = { checkUToken, actionAfterCheckinguToken };
+module.exports = { checkUToken, actionAfterCheckingUToken };

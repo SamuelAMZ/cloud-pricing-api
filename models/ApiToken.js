@@ -12,6 +12,10 @@ const apiToken = new mongoose.Schema(
       type: String,
       required: true,
     },
+    host: {
+      type: String,
+      required: true,
+    },
     remain: {
       type: Number,
       required: true,

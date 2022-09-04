@@ -24,9 +24,11 @@ const userLoginRoute = require("../auth/userRoutes/login.js");
 const tokenGenerateRoute = require("../routes/api/generateToken");
 
 // middlewares
-// check valid token (login or not)
+// check valid user token (login or not)
 const { checkUToken } = require("../middleware/checkUToken");
-const { actionAfterCheckinguToken } = require("../middleware/checkUToken");
+const { actionAfterCheckingUToken } = require("../middleware/checkUToken");
+// check valid api token
+const { checkApiToken } = require("../middleware/checkApiToken");
 
 // body parsing
 app.use(express.json());
@@ -43,83 +45,105 @@ app.get("/", (req, res) => {
 /*   
     @desc: get linode data {compute-database-storage-netwokring}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/linode
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/linode", checkUToken, actionAfterCheckinguToken, linodeRoute);
+app.use("/api/v1/linode", checkApiToken, linodeRoute);
 
 /*   
     @desc: get ovh data {compute-database-storage-netwokring}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/ovh
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/ovh", ovhRoute);
+app.use("/api/v1/ovh", checkApiToken, ovhRoute);
 
 /*   
     @desc: get vultr data {compute-database-storage-netwokring}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/vultr
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/vultr", vultrRoute);
+app.use("/api/v1/vultr", checkApiToken, vultrRoute);
 
 /*   
     @desc: get digital ocean data {compute-database-storage-netwokring}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/digitalOcean
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/digitalOcean", digitalOceanRoute);
+app.use("/api/v1/digitalOcean", checkApiToken, digitalOceanRoute);
 
 /*   
     @desc: get gcp data {compute-database-storage-netwokring}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/gcp
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/gcp", gcpRoute);
+app.use("/api/v1/gcp", checkApiToken, gcpRoute);
 
 /*   
     @desc: get aws data {compute-database-storage-netwokring}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/aws
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/aws", awsRoute);
+app.use("/api/v1/aws", checkApiToken, awsRoute);
 
 /*   
     @desc: get azure data {compute-database-storage-netwokring}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/azure
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/azure", azureRoute);
+app.use("/api/v1/azure", checkApiToken, azureRoute);
 
 /*   
     @desc: get compute data {compute}
-    @method: GET
+    @privacy: private
     @endpoint: /api/v1/compute
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/compute", computeRoute);
+app.use("/api/v1/compute", checkApiToken, computeRoute);
 
 /*   
     @desc: get database data {database}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/database
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/database", databaseRoute);
+app.use("/api/v1/database", checkApiToken, databaseRoute);
 
 /*   
     @desc: get storage data {storage}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/storage
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/storage", storageRoute);
+app.use("/api/v1/storage", checkApiToken, storageRoute);
 
 /*   
     @desc: get networking data {networking}
     @method: GET
+    @privacy: private
     @endpoint: /api/v1/networking
+    @headers: {host: "example.com", token: "token"}
 */
-app.use("/api/v1/networking", networkingRoute);
+app.use("/api/v1/networking", checkApiToken, networkingRoute);
 
 /*   
     @desc: register user
     @method: POST
+    @privacy: public
     @endpoint: /api/user/register
 */
 app.use("/api/user/register", userRegisterRoute);
@@ -127,6 +151,7 @@ app.use("/api/user/register", userRegisterRoute);
 /*   
     @desc: login user
     @method: POST
+    @privacy: public
     @endpoint: /api/user/login
 */
 app.use("/api/user/login", userLoginRoute);
@@ -134,12 +159,14 @@ app.use("/api/user/login", userLoginRoute);
 /*   
     @desc: generate token
     @method: POST
+    @privacy: private
     @endpoint: /api/token/gen
+    @body: {host: "example.com"}
 */
 app.use(
   "/api/token/gen",
   checkUToken,
-  actionAfterCheckinguToken,
+  actionAfterCheckingUToken,
   tokenGenerateRoute
 );
 
