@@ -6,7 +6,7 @@ const Joi = require("@hapi/joi");
 // dehashing pass
 const bcrypt = require("bcrypt");
 // jwt
-const userJwt = require("./jwt");
+const { createToken } = require("./jwt");
 
 const schema = Joi.object({
   email: Joi.string().required().email().lowercase(),
@@ -40,7 +40,7 @@ userLoginRoute.post("/", async (req, res) => {
     // dehash pass and try to match them
     if (await bcrypt.compare(password, checkUser.password)) {
       // generate user token
-      const token = userJwt.createToken(checkUser.id);
+      const token = createToken(checkUser.id);
       // pass token to cookie
       res.cookie("uToken", token, {
         maxAge: 24 * 60 * 60 * 1000,

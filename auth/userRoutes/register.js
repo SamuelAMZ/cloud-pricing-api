@@ -6,7 +6,7 @@ const Joi = require("@hapi/joi");
 // hashing pass
 const bcrypt = require("bcrypt");
 // jwt
-const userJwt = require("./jwt");
+const { createToken } = require("./jwt");
 
 const schema = Joi.object({
   name: Joi.string().min(3).required(),
@@ -38,7 +38,7 @@ userRegisterRoute.post("/", async (req, res) => {
     // save user
     await user.save();
     // generate user token
-    const token = userJwt.createToken(user.id);
+    const token = createToken(user.id);
     // pass token to cookie
     res.cookie("uToken", token, {
       maxAge: 24 * 60 * 60 * 1000,

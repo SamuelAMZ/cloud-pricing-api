@@ -21,6 +21,10 @@ const networkingRoute = require("../routes/product/networkingRoute.js");
 const userRegisterRoute = require("../auth/userRoutes/register.js");
 const userLoginRoute = require("../auth/userRoutes/login.js");
 
+// middlewares
+// check valid token (login or not)
+const checkUToken = require("../middleware/checkUToken");
+
 // body parsing
 app.use(express.json());
 // cookies
