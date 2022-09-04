@@ -5,6 +5,8 @@ const User = require("../../models/UserRegister");
 const Joi = require("@hapi/joi");
 // dehashing pass
 const bcrypt = require("bcrypt");
+// jwt
+const userJwt = require("./jwt");
 
 const schema = Joi.object({
   email: Joi.string().required().email().lowercase(),
@@ -37,11 +39,18 @@ userLoginRoute.post("/", async (req, res) => {
   } else {
     // dehash pass and try to match them
     if (await bcrypt.compare(password, checkUser.password)) {
+      // generate user token
+      const token = userJwt.createToken(checkUser.id);
+      // pass token to cookie
+      res.cookie("uToken", token, {
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true,
+      });
+
       res.status(200).json({
         message: "login successfully",
         id: checkUser.id,
         name: checkUser.name,
-        email: checkUser.email,
       });
     } else {
       res.status(400).json({ message: "verify password" });

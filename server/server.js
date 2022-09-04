@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 
 // routes providers
 const linodeRoute = require("../routes/provider/linodeRoute.js");
@@ -22,6 +23,8 @@ const userLoginRoute = require("../auth/userRoutes/login.js");
 
 // body parsing
 app.use(express.json());
+// cookies
+app.use(cookieParser());
 
 // connect mongoose
 mongoose.connect(process.env.DB_URI_USR);

@@ -5,6 +5,8 @@ const User = require("../../models/UserRegister");
 const Joi = require("@hapi/joi");
 // hashing pass
 const bcrypt = require("bcrypt");
+// jwt
+const userJwt = require("./jwt");
 
 const schema = Joi.object({
   name: Joi.string().min(3).required(),
@@ -33,13 +35,20 @@ userRegisterRoute.post("/", async (req, res) => {
   });
 
   try {
+    // save user
     await user.save();
+    // generate user token
+    const token = userJwt.createToken(user.id);
+    // pass token to cookie
+    res.cookie("uToken", token, {
+      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
+
     res.status(201).json({
       message: "account created successfully",
       id: user.id,
       name: user.name,
-      email: user.email,
-      password: user.password,
     });
   } catch (error) {
     res.status(400).json({ message: error.message });

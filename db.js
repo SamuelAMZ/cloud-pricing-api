@@ -11,7 +11,7 @@ module.exports = {
         return cb();
       })
       .catch((err) => {
-        console.log(error);
+        console.log(err);
         return cb(err);
       });
   },
