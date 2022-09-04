@@ -7,29 +7,40 @@ const checkUToken = (req, res, next) => {
   const uToken = req.cookies.uToken;
 
   if (uToken) {
+    // check if token is valid
     jwt.verify(uToken, process.env.JWT_U_SECRET, async (err, decodedToken) => {
       if (err) {
-        res.status(400).json({ message: "token not valid", error: err });
-        res.redirect(process.env.HOME);
-        return;
+        res.locals.user = null;
+        next();
       } else {
-        // check if token id is found in the user database
+        // check if token uid is found in the user database
         const uId = decodedToken.id;
-        const idExist = await User.findOne({ uId });
-        console.log(idExist);
-        if (!idExist.id) {
-          res.status(400).json({ message: "token not valid", error: err });
-          res.redirect(process.env.HOME);
-          return;
+        const idExist = await User.findById(uId);
+
+        if (idExist === null || !idExist) {
+          res.locals.user = null;
+          next();
         } else {
           // check for pages
+          res.locals.user = idExist;
           next();
         }
       }
     });
   } else {
-    res.redirect(process.env.HOME);
+    res.locals.user = null;
+    next();
   }
 };
 
-module.exports = checkUToken;
+// action after checing user token
+const actionAfterCheckinguToken = (req, res, next) => {
+  if (res.locals.user === null || !res.locals.user) {
+    console.log("redirected");
+    res.redirect("/");
+  } else {
+    next();
+  }
+};
+
+module.exports = { checkUToken, actionAfterCheckinguToken };

@@ -20,10 +20,13 @@ const networkingRoute = require("../routes/product/networkingRoute.js");
 // User routes
 const userRegisterRoute = require("../auth/userRoutes/register.js");
 const userLoginRoute = require("../auth/userRoutes/login.js");
+// api token routes
+const tokenGenerateRoute = require("../routes/api/generateToken");
 
 // middlewares
 // check valid token (login or not)
-const checkUToken = require("../middleware/checkUToken");
+const { checkUToken } = require("../middleware/checkUToken");
+const { actionAfterCheckinguToken } = require("../middleware/checkUToken");
 
 // body parsing
 app.use(express.json());
@@ -42,7 +45,7 @@ app.get("/", (req, res) => {
     @method: GET
     @endpoint: /api/v1/linode
 */
-app.use("/api/v1/linode", linodeRoute);
+app.use("/api/v1/linode", checkUToken, actionAfterCheckinguToken, linodeRoute);
 
 /*   
     @desc: get ovh data {compute-database-storage-netwokring}
@@ -127,6 +130,18 @@ app.use("/api/user/register", userRegisterRoute);
     @endpoint: /api/user/login
 */
 app.use("/api/user/login", userLoginRoute);
+
+/*   
+    @desc: generate token
+    @method: POST
+    @endpoint: /api/token/gen
+*/
+app.use(
+  "/api/token/gen",
+  checkUToken,
+  actionAfterCheckinguToken,
+  tokenGenerateRoute
+);
 
 app.listen(process.env.PORT, () =>
   console.log(`app listen on port ${process.env.PORT}`)

@@ -33,7 +33,7 @@ userLoginRoute.post("/", async (req, res) => {
   // check for the email address in the db
   const checkUser = await User.findOne({ email });
 
-  if (!checkUser) {
+  if (checkUser === null || !checkUser) {
     res.status(400).json({ message: "email not found" });
     return;
   } else {
