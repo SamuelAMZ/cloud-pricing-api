@@ -145,6 +145,7 @@ app.use("/api/v1/networking", checkApiToken, networkingRoute);
     @method: POST
     @privacy: public
     @endpoint: /api/user/register
+    @body: {name: "name", email: "email", password: "password"}
 */
 app.use("/api/user/register", userRegisterRoute);
 
@@ -153,6 +154,7 @@ app.use("/api/user/register", userRegisterRoute);
     @method: POST
     @privacy: public
     @endpoint: /api/user/login
+    @body: {email: "email", password: "password"}
 */
 app.use("/api/user/login", userLoginRoute);
 
