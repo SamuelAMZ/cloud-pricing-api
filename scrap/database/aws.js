@@ -16,8 +16,6 @@ const awsD = async (page18) => {
     }))
   );
 
-  console.log(postgres);
-
   //  scrap mysql
   const mysql = await page18.evaluate(() =>
     Array.from(
@@ -32,8 +30,6 @@ const awsD = async (page18) => {
         .trim(),
     }))
   );
-
-  console.log(mysql);
 
   // scrap mongo
   await page18.setViewport({
@@ -75,8 +71,6 @@ const awsD = async (page18) => {
         .trim(),
     }))
   );
-
-  console.log(mongo);
 
   postgres.push({
     type: "postgres",

@@ -41,6 +41,8 @@ const azure = async (page7) => {
     compute: { computeData },
   };
 
+  // console.log(data);
+
   azureArr(data);
 };
 

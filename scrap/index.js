@@ -1,4 +1,6 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+
 const puppeteer = require("puppeteer-extra");
 // extra
 const autoScroll = require("./extra/autoScroll");
@@ -39,9 +41,28 @@ const networkingAzure = require("./networking/azure");
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 puppeteer.use(StealthPlugin());
 
+// loging starting date
+let today = new Date();
+let date =
+  today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+let time =
+  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+let dateTime = date + " " + time;
+console.log(`strated at ${dateTime}`);
+
 (async () => {
   const browser = await puppeteer.launch({
     headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
+      "--no-zygote",
+      "--single-process", // <- this one doesn't works in Windows
+      "--disable-gpu",
+    ],
   });
 
   // -------- LINODE SCRAPPING ----------

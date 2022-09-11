@@ -68,20 +68,41 @@ function azureArr(data) {
 
 // adding data to db func
 function addingData(providerData, name) {
+  // date
+  let today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  let time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  let dateTime = date + " " + time;
+
   let obj = {};
   obj["company"] = name;
   obj["computer"] = providerData[0].compute;
   obj["storage"] = providerData[1].storage;
   obj["database"] = providerData[2].database;
   obj["networking"] = providerData[3].networking;
+  obj["lastUpdate"] = dateTime;
 
-  console.log(obj);
-
-  db.collection(name)
-    .insertOne(obj)
-    .then((res) => {
-      console.log(res);
-    });
+  if (
+    obj.company &&
+    obj.computer &&
+    obj.database &&
+    obj.networking &&
+    obj.storage
+  ) {
+    try {
+      db.collection(name)
+        .insertOne(obj)
+        .then((res) => {
+          console.log(`successfull added ${obj.company} data`);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  } else {
+    console.log(`issue with ${obj.company}`);
+  }
 }
 
 module.exports = {

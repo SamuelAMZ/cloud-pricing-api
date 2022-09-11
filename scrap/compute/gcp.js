@@ -3,7 +3,7 @@ const { gcpArr } = require("../data.js");
 const gcp = async (page5) => {
   // select 100 results
 
-  const computeData = [];
+  let computeData = [];
 
   const test = async () => {
     await page5.select(
@@ -35,7 +35,7 @@ const gcp = async (page5) => {
       }))
     );
 
-    computeData.push(gcpAll);
+    gcpAll.forEach((elm) => computeData.push(elm));
   };
 
   const heading1 = await page5.$eval(
@@ -51,7 +51,6 @@ const gcp = async (page5) => {
     await test();
 
     console.log(Math.floor(Number(heading1) - Number(heading1) / 2 - 1));
-    // console.log(computeData);
 
     await page5.click("#productList > nav > a.pagination-link.pagination-next");
     await page5.waitForTimeout(4000);
@@ -65,9 +64,25 @@ const gcp = async (page5) => {
     },
   });
 
+  // remove duplicates
+  computeData = computeData.filter(
+    (value, index, self) =>
+      index ===
+      self.findIndex(
+        (t) =>
+          t.title === value.title &&
+          t.pricePerHour === value.pricePerHour &&
+          t.ram === value.ram &&
+          t.cpu === value.cpu &&
+          t.storage === value.storage
+      )
+  );
+
   const data = {
     compute: { computeData },
   };
+
+  // console.log(data);
 
   gcpArr(data);
 };

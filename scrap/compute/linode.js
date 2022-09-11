@@ -120,7 +120,7 @@ const linode = async (page1) => {
     },
   });
 
-  console.log(linodeGP, linodeCP, linodeRM);
+  // console.log(linodeGP, linodeCP, linodeRM);
 
   const data = {
     compute: {

@@ -83,7 +83,7 @@ const digitalD = async (page15) => {
   // console.log(digitalPostgres, digitalMysql, digitalMongo);
 
   const data = {
-    compute: {
+    database: {
       postgres: digitalPostgres,
       mysql: digitalMysql,
       mongo: digitalMongo,
