@@ -6,23 +6,23 @@ const Joi = require("@hapi/joi");
 
 const checkApiToken = async (req, res, next) => {
   // verify if token is include in the request
-  const theHost = req.get("host");
+  const theDomain = req.get("domain");
   const theToken = req.get("token");
 
-  if (!theToken || !theHost) {
-    res.status(401).json({ message: "token or host not present" });
+  if (!theToken || !theDomain) {
+    res.status(401).json({ message: "token or domain not present" });
     return;
   }
 
   // joi checks
   const schema = Joi.object({
-    host: Joi.string().min(3).max(1024).required().lowercase(),
+    domain: Joi.string().min(3).max(1024).required().lowercase(),
     token: Joi.string().min(3).max(1024).required().lowercase(),
   });
 
   try {
     const validation = await schema.validateAsync({
-      host: theHost,
+      domain: theDomain,
       token: theToken,
     });
   } catch (err) {
@@ -30,11 +30,11 @@ const checkApiToken = async (req, res, next) => {
     return;
   }
 
-  // verify if host is in the db
-  const checkToken = await Token.findOne({ host: theHost });
+  // verify if domain is in the db
+  const checkToken = await Token.findOne({ domain: theDomain });
 
   if (checkToken === null || !checkToken) {
-    res.status(401).json({ message: "host not found" });
+    res.status(401).json({ message: "domain not found" });
     return;
   } else {
     // dehash the token from the request

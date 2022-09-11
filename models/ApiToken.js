@@ -12,7 +12,7 @@ const apiToken = new mongoose.Schema(
       type: String,
       required: true,
     },
-    host: {
+    domain: {
       type: String,
       required: true,
     },

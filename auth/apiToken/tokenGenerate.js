@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const Token = require("../../models/ApiToken");
 require("dotenv").config();
 
-const generateToken = async (uId, host) => {
+const generateToken = async (uId, domain) => {
   // generate token for user id
   let apiGeneratedToken = apiToken(uId);
   let apiKey = apiGeneratedToken
@@ -17,7 +17,7 @@ const generateToken = async (uId, host) => {
   const createToken = new Token({
     user: uId,
     token: hashedToken,
-    host: host,
+    domain: domain,
     remain: process.env.TOKEN_DEFAULT_REMAIN,
     used: 0,
   });

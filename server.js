@@ -5,30 +5,30 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 // routes providers
-const linodeRoute = require("../routes/provider/linodeRoute.js");
-const ovhRoute = require("../routes/provider/ovhRoute.js");
-const vultrRoute = require("../routes/provider/vultrRoute.js");
-const digitalOceanRoute = require("../routes/provider/digitalOceanRoute.js");
-const gcpRoute = require("../routes/provider/gcpRoute.js");
-const awsRoute = require("../routes/provider/awsRoute.js");
-const azureRoute = require("../routes/provider/azureRoute.js");
+const linodeRoute = require("./routes/provider/linodeRoute.js");
+const ovhRoute = require("./routes/provider/ovhRoute.js");
+const vultrRoute = require("./routes/provider/vultrRoute.js");
+const digitalOceanRoute = require("./routes/provider/digitalOceanRoute.js");
+const gcpRoute = require("./routes/provider/gcpRoute.js");
+const awsRoute = require("./routes/provider/awsRoute.js");
+const azureRoute = require("./routes/provider/azureRoute.js");
 // routes products
-const computeRoute = require("../routes/product/computeRoute.js");
-const databaseRoute = require("../routes/product/databaseRoute.js");
-const storageRoute = require("../routes/product/storageRoute.js");
-const networkingRoute = require("../routes/product/networkingRoute.js");
+const computeRoute = require("./routes/product/computeRoute.js");
+const databaseRoute = require("./routes/product/databaseRoute.js");
+const storageRoute = require("./routes/product/storageRoute.js");
+const networkingRoute = require("./routes/product/networkingRoute.js");
 // User routes
-const userRegisterRoute = require("../auth/userRoutes/register.js");
-const userLoginRoute = require("../auth/userRoutes/login.js");
+const userRegisterRoute = require("./auth/userRoutes/register.js");
+const userLoginRoute = require("./auth/userRoutes/login.js");
 // api token routes
-const tokenGenerateRoute = require("../routes/api/generateToken");
+const tokenGenerateRoute = require("./routes/api/generateToken");
 
 // middlewares
 // check valid user token (login or not)
-const { checkUToken } = require("../middleware/checkUToken");
-const { actionAfterCheckingUToken } = require("../middleware/checkUToken");
+const { checkUToken } = require("./middleware/checkUToken");
+const { actionAfterCheckingUToken } = require("./middleware/checkUToken");
 // check valid api token
-const { checkApiToken } = require("../middleware/checkApiToken");
+const { checkApiToken } = require("./middleware/checkApiToken");
 
 // body parsing
 app.use(express.json());
@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
     @method: GET
     @privacy: private
     @endpoint: /api/v1/linode
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/linode", checkApiToken, linodeRoute);
 
@@ -56,7 +56,7 @@ app.use("/api/v1/linode", checkApiToken, linodeRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/ovh
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/ovh", checkApiToken, ovhRoute);
 
@@ -65,7 +65,7 @@ app.use("/api/v1/ovh", checkApiToken, ovhRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/vultr
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/vultr", checkApiToken, vultrRoute);
 
@@ -74,7 +74,7 @@ app.use("/api/v1/vultr", checkApiToken, vultrRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/digitalOcean
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/digitalOcean", checkApiToken, digitalOceanRoute);
 
@@ -83,7 +83,7 @@ app.use("/api/v1/digitalOcean", checkApiToken, digitalOceanRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/gcp
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/gcp", checkApiToken, gcpRoute);
 
@@ -92,7 +92,7 @@ app.use("/api/v1/gcp", checkApiToken, gcpRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/aws
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/aws", checkApiToken, awsRoute);
 
@@ -101,7 +101,7 @@ app.use("/api/v1/aws", checkApiToken, awsRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/azure
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/azure", checkApiToken, azureRoute);
 
@@ -109,7 +109,7 @@ app.use("/api/v1/azure", checkApiToken, azureRoute);
     @desc: get compute data {compute}
     @privacy: private
     @endpoint: /api/v1/compute
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/compute", checkApiToken, computeRoute);
 
@@ -118,7 +118,7 @@ app.use("/api/v1/compute", checkApiToken, computeRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/database
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/database", checkApiToken, databaseRoute);
 
@@ -127,7 +127,7 @@ app.use("/api/v1/database", checkApiToken, databaseRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/storage
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/storage", checkApiToken, storageRoute);
 
@@ -136,7 +136,7 @@ app.use("/api/v1/storage", checkApiToken, storageRoute);
     @method: GET
     @privacy: private
     @endpoint: /api/v1/networking
-    @headers: {host: "example.com", token: "token"}
+    @headers: {domain: "example.com", token: "token"}
 */
 app.use("/api/v1/networking", checkApiToken, networkingRoute);
 
@@ -163,7 +163,7 @@ app.use("/api/user/login", userLoginRoute);
     @method: POST
     @privacy: private
     @endpoint: /api/token/gen
-    @body: {host: "example.com"}
+    @body: {domain: "example.com"}
 */
 app.use(
   "/api/token/gen",

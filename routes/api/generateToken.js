@@ -7,10 +7,10 @@ const Joi = require("@hapi/joi");
 
 genTokenRouter.post("/", async (req, res) => {
   const uId = res.locals.user._id;
-  const host = req.body.host;
+  const domain = req.body.domain;
 
   const schema = Joi.object({
-    host: Joi.string().min(3).max(1024).required().lowercase(),
+    domain: Joi.string().min(3).max(1024).required().lowercase(),
   });
 
   try {
@@ -24,7 +24,7 @@ genTokenRouter.post("/", async (req, res) => {
   const alreadyHaveToken = await Token.findOne({ user: uId });
   if (alreadyHaveToken === null || !alreadyHaveToken) {
     // generate token
-    const token = await generateToken(uId, host);
+    const token = await generateToken(uId, domain);
 
     if (token._message) {
       res

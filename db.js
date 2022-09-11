@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongoDb");
+const { MongoClient } = require("mongodb");
 require("dotenv").config();
 
 let dbConnection;
