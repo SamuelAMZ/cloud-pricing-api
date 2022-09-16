@@ -3,6 +3,7 @@ const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 // routes providers
 const linodeRoute = require("./routes/provider/linodeRoute.js");
@@ -34,6 +35,14 @@ const { checkApiToken } = require("./middleware/checkApiToken");
 app.use(express.json());
 // cookies
 app.use(cookieParser());
+// cors
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
 
 // connect mongoose
 mongoose.connect(process.env.DB_URI_USR);
