@@ -12,11 +12,11 @@ const digital = async (page3) => {
     ).map((item) => ({
       title: "Digital " + item.querySelector("tr td:nth-child(1)").innerText,
       pricePerHour: item
-        .querySelector("tr td:nth-child(5)")
+        .querySelector("tr td:nth-child(6)")
         .innerText.replace("$", "")
         .trim(),
       pricePerMo: item
-        .querySelector("tr td:nth-child(6)")
+        .querySelector("tr td:nth-child(7)")
         .innerText.replace("$", "")
         .trim(),
       ram: item
@@ -28,7 +28,7 @@ const digital = async (page3) => {
         .innerText.replace("vCPUs", "")
         .trim(),
       storage: item
-        .querySelector("tr td:nth-child(4)")
+        .querySelector("tr td:nth-child(5)")
         .innerText.replace("GB", "")
         .replace("TB", "")
         .trim(),
@@ -146,7 +146,7 @@ const digital = async (page3) => {
     },
   });
 
-  // console.log(digitalGP, digitalCP, digitalRM);
+  console.log(digitalGP, digitalCP, digitalRM);
 
   const data = {
     compute: {
