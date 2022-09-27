@@ -4,7 +4,7 @@ const { azureArr } = require("../data.js");
 const azureN = async () => {
   const azure = [
     {
-      provider: "AZURE",
+      title: "1 node",
       pricePerHour: "0.025",
       additionalNode: "0.01",
     },

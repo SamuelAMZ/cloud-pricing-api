@@ -91,7 +91,7 @@ const linode = async (page1) => {
 
   linodeGP.push({
     type: "general purpose",
-    currency: "USD",
+    currency: "$",
     sizes: {
       cpu: "vcpu",
       storage: "GB",
@@ -101,7 +101,7 @@ const linode = async (page1) => {
   });
   linodeCP.push({
     type: "cpu optimized",
-    currency: "USD",
+    currency: "$",
     sizes: {
       cpu: "vcpu",
       storage: "GB",
@@ -111,7 +111,7 @@ const linode = async (page1) => {
   });
   linodeRM.push({
     type: "ram optimized",
-    currency: "USD",
+    currency: "$",
     sizes: {
       cpu: "vcpu",
       storage: "GB",

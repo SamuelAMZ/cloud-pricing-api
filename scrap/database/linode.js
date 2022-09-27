@@ -10,11 +10,12 @@ const linodeD = async (page13) => {
       )
     ).map((item) => ({
       title: item.querySelector("th").innerText.trim(),
-      size: item
+      ram: item
         .querySelector("th")
         .innerText.replace("Dedicated", "")
         .replace("GB", "")
         .trim(),
+      cpu: "N/A",
       pricePerMo: item.querySelector("td").innerText.replace("$", "").trim(),
     }))
   );
@@ -27,11 +28,12 @@ const linodeD = async (page13) => {
       )
     ).map((item) => ({
       title: item.querySelector("th").innerText.trim(),
-      size: item
+      ram: item
         .querySelector("th")
         .innerText.replace("Dedicated", "")
         .replace("GB", "")
         .trim(),
+      cpu: "N/A",
       pricePerMo: item.querySelector("td").innerText.replace("$", "").trim(),
     }))
   );
@@ -44,11 +46,12 @@ const linodeD = async (page13) => {
       )
     ).map((item) => ({
       title: item.querySelector("th").innerText.trim(),
-      size: item
+      ram: item
         .querySelector("th")
         .innerText.replace("Dedicated", "")
         .replace("GB", "")
         .trim(),
+      cpu: "N/A",
       pricePerMo: item.querySelector("td").innerText.replace("$", "").trim(),
     }))
   );
@@ -56,17 +59,20 @@ const linodeD = async (page13) => {
   linodePostgres.push({
     type: "postgres",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "",
   });
   linodeMysql.push({
     type: "mysql",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "",
   });
   linodeMongo.push({
     type: "mongoDB",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "",
   });
 
   // console.log(linodePostgres, linodeMysql, linodeMongo);

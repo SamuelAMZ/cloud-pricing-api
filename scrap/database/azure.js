@@ -16,10 +16,11 @@ const azureD = async (page20) => {
           .querySelector("tr > td:nth-child(2)")
           .innerText.replace("GiB", "")
           .trim(),
-      size: item
+      ram: item
         .querySelector("tr > td:nth-child(2)")
         .innerText.replace("GiB", "")
         .trim(),
+      cpu: item.querySelector("tr > td:nth-child(1)").innerText.trim(),
       pricePerHour: item
         .querySelector("tr > td:nth-child(3)")
         .innerText.replace("/hour", "")
@@ -44,10 +45,11 @@ const azureD = async (page20) => {
           .querySelector("tr > td:nth-child(2)")
           .innerText.replace("GiB", "")
           .trim(),
-      size: item
+      ram: item
         .querySelector("tr > td:nth-child(2)")
         .innerText.replace("GiB", "")
         .trim(),
+      cpu: item.querySelector("tr > td:nth-child(1)").innerText.trim(),
       pricePerHour: item
         .querySelector("tr > td:nth-child(3)")
         .innerText.replace("/hour", "")
@@ -79,9 +81,14 @@ const azureD = async (page20) => {
       )[0].children
     ).map((item) => ({
       title: item.querySelector("tr td:nth-child(1)").innerText,
-      size: item
+      ram: item
         .querySelector("tr td:nth-child(3)")
         .innerText.replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector("tr td:nth-child(4)")
+        .innerText.replace("vCPU", "")
+        .replace("s", "")
         .trim(),
       pricePerHour: item
         .querySelector("tr td:nth-child(5)")
@@ -94,17 +101,20 @@ const azureD = async (page20) => {
   postgres.push({
     type: "postgres",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
   mysql.push({
     type: "mysql",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
   mongo.push({
     type: "mongoDB",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
 
   // console.log(postgres, mysql, mongo);

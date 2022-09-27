@@ -6,7 +6,7 @@ const digitalN = async (page24) => {
   const digital = await page24.evaluate(() => [
     {
       title: "1 node",
-      pricePerHour: document
+      pricePerMo: document
         .querySelector(".HeadingStyles__StyledH2-sc-kkk1io-1.h2")
         .innerText.replace("Starts at", "")
         .replace("per month", "")

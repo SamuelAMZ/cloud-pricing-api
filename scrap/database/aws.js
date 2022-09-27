@@ -1,32 +1,36 @@
 const { awsArr } = require("../data.js");
 
 const awsD = async (page18) => {
-  //  scrap postgres
-  const postgres = await page18.evaluate(() =>
-    Array.from(
-      Array.from(document.querySelectorAll("#data > tbody"))[0].children
-    ).map((item) => ({
-      title: item.querySelector("td.apiname").innerText,
-      size: item.querySelector("td.memory").innerText.replace("GiB", "").trim(),
-      pricePerHour: item
-        .querySelector("td.cost-ondemand-14")
-        .innerText.replace("$", "")
-        .replace("hourly", "")
-        .trim(),
-    }))
-  );
-
   //  scrap mysql
   const mysql = await page18.evaluate(() =>
     Array.from(
       Array.from(document.querySelectorAll("#data > tbody"))[0].children
     ).map((item) => ({
       title: item.querySelector("td.apiname").innerText,
-      size: item.querySelector("td.memory").innerText.replace("GiB", "").trim(),
-      pricePerHour: item
+      ram: item.querySelector("td.memory").innerText.replace("GiB", "").trim(),
+      cpu: item.querySelector("td.vcpus").innerText.replace("vCPUs", "").trim(),
+      pricePerMo: item
         .querySelector("td.cost-ondemand-2")
         .innerText.replace("$", "")
         .replace("hourly", "")
+        .replace("monthly", "")
+        .trim(),
+    }))
+  );
+
+  //  scrap postgres  #db\.t2\.small > td.cost-ondemand.cost-ondemand-14
+  const postgres = await page18.evaluate(() =>
+    Array.from(
+      Array.from(document.querySelectorAll("#data > tbody"))[0].children
+    ).map((item) => ({
+      title: item.querySelector("td.apiname").innerText,
+      ram: item.querySelector("td.memory").innerText.replace("GiB", "").trim(),
+      cpu: item.querySelector("td.vcpus").innerText.replace("vCPUs", "").trim(),
+      pricePerMo: item
+        .querySelector("td.cost-ondemand-2")
+        .innerText.replace("$", "")
+        .replace("hourly", "")
+        .replace("monthly", "")
         .trim(),
     }))
   );
@@ -60,32 +64,46 @@ const awsD = async (page18) => {
       )[0].children
     ).map((item) => ({
       title: item.querySelector("tr td:nth-child(1)").innerText,
-      size: item
+      ram: item
         .querySelector("tr td:nth-child(3)")
         .innerText.replace("GB", "")
         .trim(),
-      pricePerHour: item
-        .querySelector("tr td:nth-child(5)")
-        .innerText.replace("$", "")
-        .replace("/hr", "")
+      cpu: item
+        .querySelector("tr td:nth-child(4)")
+        .innerText.replace("vCPU", "")
+        .replace("s", "")
         .trim(),
+      pricePerMo: String(
+        (
+          Number(
+            item
+              .querySelector("tr td:nth-child(5)")
+              .innerText.replace("$", "")
+              .replace("/hr", "")
+              .trim()
+          ) * 720
+        ).toFixed(5)
+      ),
     }))
   );
 
   postgres.push({
     type: "postgres",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
   mysql.push({
     type: "mysql",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
   mongo.push({
     type: "mongoDB",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
 
   // console.log(postgres, mysql, mongo);

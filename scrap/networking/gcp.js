@@ -5,7 +5,7 @@ const { gcpArr } = require("../data.js");
 const gcpN = async () => {
   const gcp = [
     {
-      tilte: "1 node",
+      title: "1 node",
       pricePerHour: "0.025",
       additionalNode: "0.01",
     },

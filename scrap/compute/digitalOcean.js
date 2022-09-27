@@ -146,7 +146,7 @@ const digital = async (page3) => {
     },
   });
 
-  console.log(digitalGP, digitalCP, digitalRM);
+  // console.log(digitalGP, digitalCP, digitalRM);
 
   const data = {
     compute: {

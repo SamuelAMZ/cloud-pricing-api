@@ -14,7 +14,7 @@ const linodeS = async (page8) => {
         .replace(" ", "")
         .replace("TB", "000")
         .trim(),
-      price: item.querySelector("td").innerText.replace("$", "").trim(),
+      pricePerMo: item.querySelector("td").innerText.replace("$", "").trim(),
     }))
   );
 
@@ -31,7 +31,7 @@ const linodeS = async (page8) => {
         .replace(" ", "")
         .replace("TB", "000")
         .trim(),
-      price: item.querySelector("td").innerText.replace("$", "").trim(),
+      pricePerMo: item.querySelector("td").innerText.replace("$", "").trim(),
     }))
   );
 

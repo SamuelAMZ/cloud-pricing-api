@@ -8,37 +8,44 @@ const gcpD = async (page17) => {
   const postgres = [
     {
       title: "Postgres 1GB",
-      size: "1",
+      ram: "1",
+      cpu: "N/A",
       pricePerHour: (1 * constantR).toFixed(5),
     },
     {
       title: "Postgres 2GB",
-      size: "2",
+      ram: "2",
+      cpu: "N/A",
       pricePerHour: (2 * constantR).toFixed(5),
     },
     {
       title: "Postgres 4GB",
-      size: "4",
+      ram: "4",
+      cpu: "N/A",
       pricePerHour: (4 * constantR).toFixed(5),
     },
     {
       title: "Postgres 8GB",
-      size: "8",
+      ram: "8",
+      cpu: "N/A",
       pricePerHour: (8 * constantR).toFixed(5),
     },
     {
       title: "Postgres 16GB",
-      size: "16",
+      ram: "16",
+      cpu: "N/A",
       pricePerHour: (16 * constantR).toFixed(5),
     },
     {
       title: "Postgres 32GB",
-      size: "32",
+      ram: "32",
+      cpu: "N/A",
       pricePerHour: (32 * constantR).toFixed(5),
     },
     {
       title: "Postgres 64GB",
-      size: "64",
+      ram: "64",
+      cpu: "N/A",
       pricePerHour: (64 * constantR).toFixed(5),
     },
   ];
@@ -47,37 +54,44 @@ const gcpD = async (page17) => {
   const mysql = [
     {
       title: "MySql 1GB",
-      size: "1",
+      ram: "1",
+      cpu: "N/A",
       pricePerHour: (1 * constantR).toFixed(5),
     },
     {
       title: "MySql 2GB",
-      size: "2",
+      ram: "2",
+      cpu: "N/A",
       pricePerHour: (2 * constantR).toFixed(5),
     },
     {
       title: "MySql 4GB",
-      size: "4",
+      ram: "4",
+      cpu: "N/A",
       pricePerHour: (4 * constantR).toFixed(5),
     },
     {
       title: "MySql 8GB",
-      size: "8",
+      ram: "8",
+      cpu: "N/A",
       pricePerHour: (8 * constantR).toFixed(5),
     },
     {
       title: "MySql 16GB",
-      size: "16",
+      ram: "16",
+      cpu: "N/A",
       pricePerHour: (16 * constantR).toFixed(5),
     },
     {
       title: "MySql 32GB",
-      size: "32",
+      ram: "32",
+      cpu: "N/A",
       pricePerHour: (32 * constantR).toFixed(5),
     },
     {
       title: "MySql 64GB",
-      size: "64",
+      ram: "64",
+      cpu: "N/A",
       pricePerHour: (64 * constantR).toFixed(5),
     },
   ];
@@ -105,9 +119,14 @@ const gcpD = async (page17) => {
       )[0].children
     ).map((item) => ({
       title: item.querySelector("tr td:nth-child(1)").innerText,
-      size: item
+      ram: item
         .querySelector("tr td:nth-child(3)")
         .innerText.replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector("tr td:nth-child(4)")
+        .innerText.replace("vCPU", "")
+        .replace("s", "")
         .trim(),
       pricePerHour: item
         .querySelector("tr td:nth-child(5)")
@@ -120,17 +139,20 @@ const gcpD = async (page17) => {
   postgres.push({
     type: "postgres",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "",
   });
   mysql.push({
     type: "mysql",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "",
   });
   mongo.push({
     type: "mongoDB",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "",
   });
 
   // console.log(postgres, mysql, mongo);

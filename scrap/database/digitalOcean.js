@@ -10,10 +10,15 @@ const digitalD = async (page15) => {
         )
       )[0].children
     ).map((item) => ({
-      Title: "Postgres " + item.querySelector("tr td:nth-child(1)").innerText,
-      size: item
+      title: "Postgres " + item.querySelector("tr td:nth-child(1)").innerText,
+      ram: item
         .querySelector("tr td:nth-child(1)")
         .innerText.replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector("tr td:nth-child(2)")
+        .innerText.replace("vCPU", "")
+        .replace("s", "")
         .trim(),
       pricePerMo: item
         .querySelector("tr td:nth-child(6)")
@@ -32,9 +37,14 @@ const digitalD = async (page15) => {
       )[0].children
     ).map((item) => ({
       title: "Mysql " + item.querySelector("tr td:nth-child(1)").innerText,
-      size: item
+      ram: item
         .querySelector("tr td:nth-child(1)")
         .innerText.replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector("tr td:nth-child(2)")
+        .innerText.replace("vCPU", "")
+        .replace("s", "")
         .trim(),
       pricePerMo: item
         .querySelector("tr td:nth-child(6)")
@@ -53,9 +63,14 @@ const digitalD = async (page15) => {
       )[0].children
     ).map((item) => ({
       title: "MongoDB " + item.querySelector("tr td:nth-child(1)").innerText,
-      size: item
+      ram: item
         .querySelector("tr td:nth-child(1)")
         .innerText.replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector("tr td:nth-child(2)")
+        .innerText.replace("vCPU", "")
+        .replace("s", "")
         .trim(),
       pricePerMo: item
         .querySelector("tr td:nth-child(6)")
@@ -67,17 +82,20 @@ const digitalD = async (page15) => {
   digitalPostgres.push({
     type: "postgres",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
   digitalMysql.push({
     type: "mysql",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
   digitalMongo.push({
     type: "mongoDB",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
   });
 
   // console.log(digitalPostgres, digitalMysql, digitalMongo);

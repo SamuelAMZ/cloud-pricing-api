@@ -55,10 +55,12 @@ const ovhS = async (page9) => {
   ovhBS.push({
     type: "block storage",
     currency: "€/GB",
+    size: "GB",
   });
   ovhOS.push({
     type: "object storage",
     currency: "€/GB",
+    size: "GB",
   });
 
   // console.log(ovhBS, ovhOS);

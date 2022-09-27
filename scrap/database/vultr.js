@@ -4,25 +4,81 @@ const vultrD = async (page16) => {
   //  scrap Mysql
   const vultrMysql = await page16.evaluate(() =>
     Array.from(
-      document.querySelectorAll(
-        "#storage-optimized > div:nth-child(5) > div > div.pt__body.js-body > div"
-      )
+      Array.from(
+        document.querySelectorAll(
+          "#mysql > div.pricing-hide-on-mobile > div > div.pt__body.js-body"
+        )
+      )[0].children
     ).map((item) => ({
       title:
-        "vultr" +
+        "mySql " +
         item
-          .querySelector(".pt__cell:first-child")
-          .innerText.replace("GB", "")
+          .querySelector(".pt__cell:nth-child(1)")
+          .innerText.replace("\n", "")
           .trim(),
-      size: item
-        .querySelector(".pt__cell:first-child")
+      ram: item
+        .querySelector(".pt__cell:nth-child(1)")
         .innerText.replace("\n", "")
         .replace("GB", "")
         .trim(),
+      cpu: item
+        .querySelector(".pt__cell:nth-child(2)")
+        .innerText.replace("\n", "")
+        .replace("vCPU", "")
+        .replace("s", "")
+        .trim(),
       pricePerHour: item
-        .querySelector("div:nth-child(6)")
-        .innerText.replace("/hr", "")
-        .replace("$", "")
+        .querySelector(".pt__cell:nth-child(6)")
+        .innerText.replace("$", "")
+        .replace("/hr", "")
+        .replace("\n", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector(".pt__cell:nth-child(5)")
+        .innerText.replace("$", "")
+        .replace("/mo", "")
+        .replace("\n", "")
+        .trim(),
+    }))
+  );
+
+  //  scrap Mysql
+  const vultrPostgres = await page16.evaluate(() =>
+    Array.from(
+      Array.from(
+        document.querySelectorAll(
+          "#postgresql > div.pricing-hide-on-mobile > div > div.pt__body.js-body"
+        )
+      )[0].children
+    ).map((item) => ({
+      title:
+        "postgres " +
+        item
+          .querySelector(".pt__cell:nth-child(1)")
+          .innerText.replace("\n", "")
+          .trim(),
+      ram: item
+        .querySelector(".pt__cell:nth-child(1)")
+        .innerText.replace("\n", "")
+        .replace("GB", "")
+        .trim(),
+      cpu: item
+        .querySelector(".pt__cell:nth-child(2)")
+        .innerText.replace("\n", "")
+        .replace("vCPU", "")
+        .replace("s", "")
+        .trim(),
+      pricePerHour: item
+        .querySelector(".pt__cell:nth-child(6)")
+        .innerText.replace("$", "")
+        .replace("/hr", "")
+        .replace("\n", "")
+        .trim(),
+      pricePerMo: item
+        .querySelector(".pt__cell:nth-child(5)")
+        .innerText.replace("$", "")
+        .replace("/mo", "")
+        .replace("\n", "")
         .trim(),
     }))
   );
@@ -30,14 +86,22 @@ const vultrD = async (page16) => {
   vultrMysql.push({
     type: "mysql",
     currency: "$",
-    size: "GB",
+    ram: "GB",
+    cpu: "vCPUs",
+  });
+  vultrPostgres.push({
+    type: "postgres",
+    currency: "$",
+    ram: "GB",
+    cpu: "vCPUs",
   });
 
-  // console.log(vultrMysql);
+  // console.log(vultrMysql, vultrPostgres);
 
   const data = {
     database: {
-      generalPurpose: vultrMysql,
+      mysql: vultrMysql,
+      postgres: vultrPostgres,
     },
   };
 
